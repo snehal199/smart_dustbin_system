@@ -46,6 +46,7 @@ public class landing extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 768));
@@ -61,6 +62,7 @@ public class landing extends javax.swing.JFrame {
         jTextField7.setForeground(new java.awt.Color(29, 53, 87));
         jTextField7.setText("What can we do for you?");
         jTextField7.setBorder(null);
+        jTextField7.setFocusable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -83,6 +85,7 @@ public class landing extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(249, 251, 242));
         jLabel1.setText("DASHBOARD");
+        jLabel1.setNextFocusableComponent(jButton4);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -105,9 +108,17 @@ public class landing extends javax.swing.JFrame {
         );
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Downloads\\Webp.net-resizeimage (8).png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\framework.png")); // NOI18N
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setFocusPainted(false);
+        jButton2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jButton2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jButton2FocusLost(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -115,9 +126,16 @@ public class landing extends javax.swing.JFrame {
         });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Downloads\\Webp.net-resizeimage (3).png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\van.png")); // NOI18N
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setFocusPainted(false);
+        jButton3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jButton3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jButton3FocusLost(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -125,9 +143,17 @@ public class landing extends javax.swing.JFrame {
         });
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Downloads\\Webp.net-resizeimage (9).png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\sensor.png")); // NOI18N
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.setFocusPainted(false);
+        jButton4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jButton4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jButton4FocusLost(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -135,9 +161,17 @@ public class landing extends javax.swing.JFrame {
         });
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Downloads\\Webp.net-resizeimage (7).png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\dustbin.png")); // NOI18N
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.setFocusPainted(false);
+        jButton5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jButton5FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jButton5FocusLost(evt);
+            }
+        });
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -145,9 +179,17 @@ public class landing extends javax.swing.JFrame {
         });
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Downloads\\Webp.net-resizeimage (6).png")); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\start.png")); // NOI18N
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton6.setFocusPainted(false);
+        jButton6.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jButton6FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jButton6FocusLost(evt);
+            }
+        });
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -155,9 +197,17 @@ public class landing extends javax.swing.JFrame {
         });
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Downloads\\Webp.net-resizeimage (5).png")); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\stop.png")); // NOI18N
         jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton7.setFocusPainted(false);
+        jButton7.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jButton7FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jButton7FocusLost(evt);
+            }
+        });
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -170,6 +220,7 @@ public class landing extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(29, 53, 87));
         jTextField1.setText("Sensor Configuration");
         jTextField1.setBorder(null);
+        jTextField1.setFocusable(false);
 
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(255, 255, 255));
@@ -177,6 +228,7 @@ public class landing extends javax.swing.JFrame {
         jTextField2.setForeground(new java.awt.Color(29, 53, 87));
         jTextField2.setText("Framework Configuration");
         jTextField2.setBorder(null);
+        jTextField2.setFocusable(false);
 
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(255, 255, 255));
@@ -184,6 +236,7 @@ public class landing extends javax.swing.JFrame {
         jTextField3.setForeground(new java.awt.Color(29, 53, 87));
         jTextField3.setText("Dustbin Registration");
         jTextField3.setBorder(null);
+        jTextField3.setFocusable(false);
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(255, 255, 255));
@@ -191,6 +244,7 @@ public class landing extends javax.swing.JFrame {
         jTextField4.setForeground(new java.awt.Color(29, 53, 87));
         jTextField4.setText("Van Registration");
         jTextField4.setBorder(null);
+        jTextField4.setFocusable(false);
 
         jTextField5.setEditable(false);
         jTextField5.setBackground(new java.awt.Color(255, 255, 255));
@@ -198,6 +252,7 @@ public class landing extends javax.swing.JFrame {
         jTextField5.setForeground(new java.awt.Color(29, 53, 87));
         jTextField5.setText("Stop Monitoring");
         jTextField5.setBorder(null);
+        jTextField5.setFocusable(false);
 
         jTextField6.setEditable(false);
         jTextField6.setBackground(new java.awt.Color(255, 255, 255));
@@ -205,6 +260,7 @@ public class landing extends javax.swing.JFrame {
         jTextField6.setForeground(new java.awt.Color(29, 53, 87));
         jTextField6.setText("Start Monitoring");
         jTextField6.setBorder(null);
+        jTextField6.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -293,35 +349,91 @@ public class landing extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.setVisible(false);
-        new vanRegistration().setVisible(true);    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new sensorConfig().setVisible(true); 
+        sensorConfig obj = new sensorConfig();
+        obj.main(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        this.setVisible(false);
-        new dustbinRegistration().setVisible(true);        
+        dustbinRegistration obj = new dustbinRegistration();
+        obj.main(null);        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        startMonitoring obj = new startMonitoring();
+        obj.main(null);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        stopMonitoring obj = new stopMonitoring();
+        obj.main(null);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new frameworkConfiguration().setVisible(true);
+        frameworkConfiguration obj = new frameworkConfiguration();
+        obj.main(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        vanRegistration obj = new vanRegistration();
+        obj.main(null);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton7FocusGained
+        // TODO add your handling code here:
+        jTextField5.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_jButton7FocusGained
+
+    private void jButton4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton4FocusGained
+        jTextField1.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_jButton4FocusGained
+
+    private void jButton5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton5FocusGained
+        jTextField3.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_jButton5FocusGained
+
+    private void jButton3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton3FocusGained
+        jTextField4.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_jButton3FocusGained
+
+    private void jButton6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton6FocusGained
+        jTextField6.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_jButton6FocusGained
+
+    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
+        jTextField2.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_jButton2FocusGained
+
+    private void jButton4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton4FocusLost
+        jTextField1.setForeground(new java.awt.Color(29,53,87));
+    }//GEN-LAST:event_jButton4FocusLost
+
+    private void jButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusLost
+        jTextField2.setForeground(new java.awt.Color(29,53,87));
+    }//GEN-LAST:event_jButton2FocusLost
+
+    private void jButton5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton5FocusLost
+        jTextField3.setForeground(new java.awt.Color(29,53,87));
+    }//GEN-LAST:event_jButton5FocusLost
+
+    private void jButton3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton3FocusLost
+        jTextField4.setForeground(new java.awt.Color(29,53,87));
+    }//GEN-LAST:event_jButton3FocusLost
+
+    private void jButton6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton6FocusLost
+        jTextField6.setForeground(new java.awt.Color(29,53,87));
+    }//GEN-LAST:event_jButton6FocusLost
+
+    private void jButton7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton7FocusLost
+        jTextField5.setForeground(new java.awt.Color(29,53,87));
+    }//GEN-LAST:event_jButton7FocusLost
+
+   
     /**
      * @param args the command line arguments
      */
