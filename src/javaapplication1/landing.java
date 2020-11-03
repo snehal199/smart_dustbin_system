@@ -4,12 +4,32 @@
  * and open the template in the editor.
  */
 package javaapplication1;
+import java.util.*;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
  * @author Snehalreet
  */
 public class landing extends javax.swing.JFrame {
+    
+    static landing dashboard;
+    static sensorConfig sc;
+    static frameworkConfiguration fg;
+    static vanRegistration vr;
+    static dustbinRegistration dr;
+    static startMonitoring sttm;
+    static stopMonitoring stpm;
+    
+    static Map<String, Dustbin> dustbin = new HashMap<String, Dustbin>();
+    static Map<String, Van> van = new HashMap<String, Van>();
+    static double moistureThreshold = 61;                 //in percentage
+    static double ultrasonicThreshold = 15;               //distance in centimeters
+    static int vanResponseDelay = 15;                    //in minutes
+    static int dustbinStatusDelay = 20;                  //in minutes
+    static double maxDustbinSize = 80.0;                      //in centimeters
+    static String defaultBinKey = "00";
+    static String defaultVanKey = "00";
 
     /**
      * Creates new form landing
@@ -32,12 +52,12 @@ public class landing extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jTextField7 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        frameworkConfigButton = new javax.swing.JButton();
+        registerVanButton = new javax.swing.JButton();
+        sensorConfigButton = new javax.swing.JButton();
+        registerDustbinButton = new javax.swing.JButton();
+        startMonitorButton = new javax.swing.JButton();
+        stopMonitorButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -85,7 +105,7 @@ public class landing extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(249, 251, 242));
         jLabel1.setText("DASHBOARD");
-        jLabel1.setNextFocusableComponent(jButton4);
+        jLabel1.setNextFocusableComponent(sensorConfigButton);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -107,110 +127,104 @@ public class landing extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\framework.png")); // NOI18N
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.addFocusListener(new java.awt.event.FocusAdapter() {
+        frameworkConfigButton.setBackground(new java.awt.Color(255, 255, 255));
+        frameworkConfigButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        frameworkConfigButton.setFocusPainted(false);
+        frameworkConfigButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton2FocusGained(evt);
+                frameworkConfigButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton2FocusLost(evt);
+                frameworkConfigButtonFocusLost(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        frameworkConfigButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                frameworkConfigButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\van.png")); // NOI18N
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addFocusListener(new java.awt.event.FocusAdapter() {
+        registerVanButton.setBackground(new java.awt.Color(255, 255, 255));
+        registerVanButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerVanButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton3FocusGained(evt);
+                registerVanButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton3FocusLost(evt);
+                registerVanButtonFocusLost(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        registerVanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                registerVanButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\sensor.png")); // NOI18N
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setFocusPainted(false);
-        jButton4.addFocusListener(new java.awt.event.FocusAdapter() {
+        sensorConfigButton.setBackground(new java.awt.Color(255, 255, 255));
+        sensorConfigButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sensorConfigButton.setFocusPainted(false);
+        sensorConfigButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton4FocusGained(evt);
+                sensorConfigButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton4FocusLost(evt);
+                sensorConfigButtonFocusLost(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        sensorConfigButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                sensorConfigButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\dustbin.png")); // NOI18N
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setFocusPainted(false);
-        jButton5.addFocusListener(new java.awt.event.FocusAdapter() {
+        registerDustbinButton.setBackground(new java.awt.Color(255, 255, 255));
+        registerDustbinButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerDustbinButton.setFocusPainted(false);
+        registerDustbinButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton5FocusGained(evt);
+                registerDustbinButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton5FocusLost(evt);
+                registerDustbinButtonFocusLost(evt);
             }
         });
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        registerDustbinButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                registerDustbinButtonActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\start.png")); // NOI18N
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setFocusPainted(false);
-        jButton6.addFocusListener(new java.awt.event.FocusAdapter() {
+        startMonitorButton.setBackground(new java.awt.Color(255, 255, 255));
+        startMonitorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        startMonitorButton.setFocusPainted(false);
+        startMonitorButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton6FocusGained(evt);
+                startMonitorButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton6FocusLost(evt);
+                startMonitorButtonFocusLost(evt);
             }
         });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        startMonitorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                startMonitorButtonActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(255, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\stop.png")); // NOI18N
-        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton7.setFocusPainted(false);
-        jButton7.addFocusListener(new java.awt.event.FocusAdapter() {
+        stopMonitorButton.setBackground(new java.awt.Color(255, 255, 255));
+        stopMonitorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        stopMonitorButton.setFocusPainted(false);
+        stopMonitorButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton7FocusGained(evt);
+                stopMonitorButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton7FocusLost(evt);
+                stopMonitorButtonFocusLost(evt);
             }
         });
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        stopMonitorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                stopMonitorButtonActionPerformed(evt);
             }
         });
 
@@ -272,12 +286,12 @@ public class landing extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(startMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(registerDustbinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sensorConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,13 +301,13 @@ public class landing extends javax.swing.JFrame {
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(126, 126, 126)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerVanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(frameworkConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stopMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -309,25 +323,25 @@ public class landing extends javax.swing.JFrame {
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(frameworkConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(registerVanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(stopMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sensorConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(registerDustbinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(startMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,89 +363,101 @@ public class landing extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void sensorConfigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorConfigButtonActionPerformed
         // TODO add your handling code here:
-        sensorConfig obj = new sensorConfig();
-        obj.main(null);
-    }//GEN-LAST:event_jButton4ActionPerformed
+        sc = new sensorConfig();
+        dashboard = this;
+        dashboard.setVisible(false);
+        sc.setVisible(true);
+    }//GEN-LAST:event_sensorConfigButtonActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        dustbinRegistration obj = new dustbinRegistration();
-        obj.main(null);        
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void registerDustbinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDustbinButtonActionPerformed
+        dr = new dustbinRegistration();
+        dashboard = this;
+        dashboard.setVisible(false);
+        dr.setVisible(true);    
+    }//GEN-LAST:event_registerDustbinButtonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void startMonitorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startMonitorButtonActionPerformed
         // TODO add your handling code here:
-        startMonitoring obj = new startMonitoring();
-        obj.main(null);
-    }//GEN-LAST:event_jButton6ActionPerformed
+        sttm = new startMonitoring();
+        dashboard = this;
+        dashboard.setVisible(false);
+        sttm.setVisible(true);
+    }//GEN-LAST:event_startMonitorButtonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void stopMonitorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopMonitorButtonActionPerformed
         // TODO add your handling code here:
-        stopMonitoring obj = new stopMonitoring();
-        obj.main(null);
-    }//GEN-LAST:event_jButton7ActionPerformed
+        stpm = new stopMonitoring();
+        dashboard = this;
+        dashboard.setVisible(false);
+        stpm.setVisible(true);
+    }//GEN-LAST:event_stopMonitorButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void frameworkConfigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frameworkConfigButtonActionPerformed
         // TODO add your handling code here:
-        frameworkConfiguration obj = new frameworkConfiguration();
-        obj.main(null);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        fg = new frameworkConfiguration();
+        dashboard = this;
+        dashboard.setVisible(false);
+        fg.setVisible(true);
+    }//GEN-LAST:event_frameworkConfigButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void registerVanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerVanButtonActionPerformed
         // TODO add your handling code here:
-        vanRegistration obj = new vanRegistration();
-        obj.main(null);
-    }//GEN-LAST:event_jButton3ActionPerformed
+        vr = new vanRegistration();
+        dashboard = this;
+        dashboard.setVisible(false);
+        vr.setVisible(true);
+    }//GEN-LAST:event_registerVanButtonActionPerformed
 
-    private void jButton7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton7FocusGained
+    private void stopMonitorButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stopMonitorButtonFocusGained
         // TODO add your handling code here:
         jTextField5.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton7FocusGained
+    }//GEN-LAST:event_stopMonitorButtonFocusGained
 
-    private void jButton4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton4FocusGained
+    private void sensorConfigButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sensorConfigButtonFocusGained
         jTextField1.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton4FocusGained
+    }//GEN-LAST:event_sensorConfigButtonFocusGained
 
-    private void jButton5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton5FocusGained
+    private void registerDustbinButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerDustbinButtonFocusGained
         jTextField3.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton5FocusGained
+    }//GEN-LAST:event_registerDustbinButtonFocusGained
 
-    private void jButton3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton3FocusGained
+    private void registerVanButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerVanButtonFocusGained
         jTextField4.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton3FocusGained
+    }//GEN-LAST:event_registerVanButtonFocusGained
 
-    private void jButton6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton6FocusGained
+    private void startMonitorButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startMonitorButtonFocusGained
         jTextField6.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton6FocusGained
+    }//GEN-LAST:event_startMonitorButtonFocusGained
 
-    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
+    private void frameworkConfigButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_frameworkConfigButtonFocusGained
         jTextField2.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton2FocusGained
+    }//GEN-LAST:event_frameworkConfigButtonFocusGained
 
-    private void jButton4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton4FocusLost
+    private void sensorConfigButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sensorConfigButtonFocusLost
         jTextField1.setForeground(new java.awt.Color(29,53,87));
-    }//GEN-LAST:event_jButton4FocusLost
+    }//GEN-LAST:event_sensorConfigButtonFocusLost
 
-    private void jButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusLost
+    private void frameworkConfigButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_frameworkConfigButtonFocusLost
         jTextField2.setForeground(new java.awt.Color(29,53,87));
-    }//GEN-LAST:event_jButton2FocusLost
+    }//GEN-LAST:event_frameworkConfigButtonFocusLost
 
-    private void jButton5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton5FocusLost
+    private void registerDustbinButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerDustbinButtonFocusLost
         jTextField3.setForeground(new java.awt.Color(29,53,87));
-    }//GEN-LAST:event_jButton5FocusLost
+    }//GEN-LAST:event_registerDustbinButtonFocusLost
 
-    private void jButton3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton3FocusLost
+    private void registerVanButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerVanButtonFocusLost
         jTextField4.setForeground(new java.awt.Color(29,53,87));
-    }//GEN-LAST:event_jButton3FocusLost
+    }//GEN-LAST:event_registerVanButtonFocusLost
 
-    private void jButton6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton6FocusLost
+    private void startMonitorButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startMonitorButtonFocusLost
         jTextField6.setForeground(new java.awt.Color(29,53,87));
-    }//GEN-LAST:event_jButton6FocusLost
+    }//GEN-LAST:event_startMonitorButtonFocusLost
 
-    private void jButton7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton7FocusLost
+    private void stopMonitorButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stopMonitorButtonFocusLost
         jTextField5.setForeground(new java.awt.Color(29,53,87));
-    }//GEN-LAST:event_jButton7FocusLost
+    }//GEN-LAST:event_stopMonitorButtonFocusLost
 
    
     /**
@@ -464,18 +490,22 @@ public class landing extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new landing().setVisible(true);
+                landing o = new landing();
+                o.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                o.setVisible(true);
             }
         });
+        
+        Dustbin d = new Dustbin();
+        d.ID = defaultBinKey;
+        d.dimension = "80*20*20";
+        d.location = "cc3 main entrance";
+        
+        dustbin.put(defaultBinKey, d);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton frameworkConfigButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -487,5 +517,10 @@ public class landing extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton registerDustbinButton;
+    private javax.swing.JButton registerVanButton;
+    private javax.swing.JButton sensorConfigButton;
+    private javax.swing.JButton startMonitorButton;
+    private javax.swing.JButton stopMonitorButton;
     // End of variables declaration//GEN-END:variables
 }

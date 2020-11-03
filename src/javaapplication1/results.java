@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package javaapplication1;
+import java.util.*; 
 
 /**
  *
@@ -14,8 +15,25 @@ public class results extends javax.swing.JFrame {
     /**
      * Creates new form results
      */
-    public results() {
+    public results(String key) {
         initComponents();
+        
+        binIDLabel.setText(key);
+        setProgressBars(key);
+    }
+    
+    private void setProgressBars(String key){
+        //We will get the garbage level and moisture level of the respective dustbin using this key
+        //For now we will generate a random value for the moisture and garbage level
+        
+        Random rand = new Random(); 
+  
+        // Generate random integers in range 0 to 99 
+        int moistureLevel = rand.nextInt(100); 
+        int garbageLevel = rand.nextInt(100); 
+        
+        garbageProgressBar.setValue(garbageLevel);
+        moistureProgressBar.setValue(moistureLevel);
     }
 
     /**
@@ -32,14 +50,14 @@ public class results extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jProgressBar2 = new javax.swing.JProgressBar();
+        garbageProgressBar = new javax.swing.JProgressBar();
+        moistureProgressBar = new javax.swing.JProgressBar();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
+        binIDLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.white);
 
@@ -66,28 +84,25 @@ public class results extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\start.png")); // NOI18N
-
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(7, 59, 76));
         jLabel3.setText("Dustbin ID:");
         jLabel3.setFocusable(false);
 
-        jProgressBar1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jProgressBar1.setForeground(new java.awt.Color(240, 45, 58));
-        jProgressBar1.setValue(40);
-        jProgressBar1.setBorderPainted(false);
-        jProgressBar1.setFocusable(false);
-        jProgressBar1.setOpaque(true);
-        jProgressBar1.setStringPainted(true);
+        garbageProgressBar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        garbageProgressBar.setForeground(new java.awt.Color(240, 45, 58));
+        garbageProgressBar.setValue(40);
+        garbageProgressBar.setBorderPainted(false);
+        garbageProgressBar.setFocusable(false);
+        garbageProgressBar.setOpaque(true);
+        garbageProgressBar.setStringPainted(true);
 
-        jProgressBar2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jProgressBar2.setForeground(new java.awt.Color(0, 83, 119));
-        jProgressBar2.setValue(15);
-        jProgressBar2.setBorderPainted(false);
-        jProgressBar2.setFocusable(false);
-        jProgressBar2.setString("15%");
-        jProgressBar2.setStringPainted(true);
+        moistureProgressBar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        moistureProgressBar.setForeground(new java.awt.Color(0, 83, 119));
+        moistureProgressBar.setValue(15);
+        moistureProgressBar.setBorderPainted(false);
+        moistureProgressBar.setFocusable(false);
+        moistureProgressBar.setStringPainted(true);
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(7, 59, 76));
@@ -97,30 +112,31 @@ public class results extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(7, 59, 76));
         jLabel5.setText("Garbage level:");
 
-        jButton1.setBackground(new java.awt.Color(26, 83, 92));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-        jButton1.setText("GO BACK");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        jButton1.setOpaque(true);
-        jButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+        backButton.setBackground(new java.awt.Color(26, 83, 92));
+        backButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        backButton.setForeground(new java.awt.Color(249, 251, 242));
+        backButton.setText("GO BACK");
+        backButton.setBorder(null);
+        backButton.setContentAreaFilled(false);
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton.setFocusPainted(false);
+        backButton.setOpaque(true);
+        backButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton1FocusGained(evt);
+                backButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton1FocusLost(evt);
+                backButtonFocusLost(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
-        jLabel6.setBackground(java.awt.Color.white);
+        binIDLabel.setBackground(java.awt.Color.white);
+        binIDLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,7 +149,7 @@ public class results extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(binIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,12 +158,12 @@ public class results extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(moistureProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(garbageProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(417, 417, 417)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(223, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -162,17 +178,17 @@ public class results extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(binIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(19, 19, 19)
                 .addComponent(jLabel5)
                 .addGap(27, 27, 27)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(garbageProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85)
                 .addComponent(jLabel4)
                 .addGap(34, 34, 34)
-                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(moistureProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 178, Short.MAX_VALUE))
         );
 
@@ -190,18 +206,18 @@ public class results extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusGained
-        jButton1.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton1FocusGained
+    private void backButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_backButtonFocusGained
+        backButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_backButtonFocusGained
 
-    private void jButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusLost
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton1FocusLost
+    private void backButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_backButtonFocusLost
+        backButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_backButtonFocusLost
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,22 +249,22 @@ public class results extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new results().setVisible(true);
+                new results(landing.defaultBinKey).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton backButton;
+    private javax.swing.JLabel binIDLabel;
+    private javax.swing.JProgressBar garbageProgressBar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
+    private javax.swing.JProgressBar moistureProgressBar;
     // End of variables declaration//GEN-END:variables
 }

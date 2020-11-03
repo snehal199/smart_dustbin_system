@@ -1,5 +1,8 @@
 package javaapplication1;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +20,16 @@ public class stopMonitoring extends javax.swing.JFrame {
      */
     public stopMonitoring() {
         initComponents();
+        
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    //System.out.println("WindowClosingDemo.windowClosing");
+                    landing.dashboard.setVisible(true);
+                    //landing.stpm.setVisible(false);
+                    dispose();
+                    }
+                });
     }
 
     /**
@@ -37,7 +50,7 @@ public class stopMonitoring extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.white);
 
@@ -76,8 +89,6 @@ public class stopMonitoring extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
         );
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\stop.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(7, 59, 76));
@@ -156,6 +167,7 @@ public class stopMonitoring extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        landing.dashboard.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

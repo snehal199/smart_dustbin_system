@@ -5,6 +5,8 @@
  */
 package javaapplication1;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 /**
  *
  * @author Snehalreet
@@ -16,6 +18,16 @@ public class dustbinRegistration extends javax.swing.JFrame {
      */
     public dustbinRegistration() {
         initComponents();
+        
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    //System.out.println("WindowClosingDemo.windowClosing");
+                    landing.dashboard.setVisible(true);
+                    //landing.dr.setVisible(false);
+                    dispose();
+                    }
+                });
     }
 
     /**
@@ -34,11 +46,12 @@ public class dustbinRegistration extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        idTextField = new javax.swing.JTextField();
+        locationTextField = new javax.swing.JTextField();
+        dimensionsTextField = new javax.swing.JTextField();
+        cancelButton = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
+        notificationLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1024, 768));
@@ -59,8 +72,6 @@ public class dustbinRegistration extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 92, Short.MAX_VALUE)
         );
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\dustbin.png")); // NOI18N
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
@@ -90,57 +101,61 @@ public class dustbinRegistration extends javax.swing.JFrame {
         jTextField4.setText("Dustbin ID:");
         jTextField4.setBorder(null);
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        idTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        locationTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        dimensionsTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(26, 83, 92));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-        jButton1.setText("GO BACK");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        jButton1.setOpaque(true);
-        jButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+        cancelButton.setBackground(new java.awt.Color(26, 83, 92));
+        cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
+        cancelButton.setText("CANCEL");
+        cancelButton.setBorder(null);
+        cancelButton.setContentAreaFilled(false);
+        cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        cancelButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton1FocusGained(evt);
+                cancelButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton1FocusLost(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelButtonFocusLost(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(26, 83, 92));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-        jButton2.setText("REGISTER");
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.setOpaque(true);
-        jButton2.addFocusListener(new java.awt.event.FocusAdapter() {
+        registerButton.setBackground(new java.awt.Color(26, 83, 92));
+        registerButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        registerButton.setForeground(new java.awt.Color(249, 251, 242));
+        registerButton.setText("REGISTER");
+        registerButton.setBorder(null);
+        registerButton.setContentAreaFilled(false);
+        registerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerButton.setFocusPainted(false);
+        registerButton.setOpaque(true);
+        registerButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton2FocusGained(evt);
+                registerButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton2FocusLost(evt);
+                registerButtonFocusLost(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                registerButtonActionPerformed(evt);
             }
         });
+
+        notificationLabel.setBackground(java.awt.Color.white);
+        notificationLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        notificationLabel.setForeground(new java.awt.Color(0, 221, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,16 +178,21 @@ public class dustbinRegistration extends javax.swing.JFrame {
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(137, 137, 137)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(idTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(locationTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dimensionsTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(230, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(300, 300, 300))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(300, 300, 300))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(notificationLabel)
+                        .addGap(359, 359, 359))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,21 +204,23 @@ public class dustbinRegistration extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5)
+                    .addComponent(idTextField)
                     .addComponent(jTextField4))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField6)
+                    .addComponent(locationTextField)
                     .addComponent(jTextField3))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7))
+                    .addComponent(dimensionsTextField))
                 .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 106, Short.MAX_VALUE))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,31 +237,41 @@ public class dustbinRegistration extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        idTextField.setText("");
+        locationTextField.setText("");
+        dimensionsTextField.setText("");
+        notificationLabel.setText("");
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        Dustbin d = new Dustbin();
+        d.ID = idTextField.getText();
+        d.location = locationTextField.getText();
+        d.dimension = dimensionsTextField.getText();
+        
+        landing.dustbin.put(d.ID, d);
+        notificationLabel.setText("Dustbin Registered successfully.");
+        //System.out.println("dustbin registered");
+    }//GEN-LAST:event_registerButtonActionPerformed
 
-    private void jButton1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusGained
-        jButton1.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton1FocusGained
+    private void cancelButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusGained
+        cancelButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_cancelButtonFocusGained
 
-    private void jButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusLost
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton1FocusLost
+    private void cancelButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusLost
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_cancelButtonFocusLost
 
-    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
-        jButton2.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton2FocusGained
+    private void registerButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerButtonFocusGained
+        registerButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_registerButtonFocusGained
 
-    private void jButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusLost
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton2FocusLost
+    private void registerButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerButtonFocusLost
+        registerButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_registerButtonFocusLost
 
     /**
      * @param args the command line arguments
@@ -279,8 +311,9 @@ public class dustbinRegistration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField dimensionsTextField;
+    private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -288,8 +321,8 @@ public class dustbinRegistration extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField locationTextField;
+    private javax.swing.JLabel notificationLabel;
+    private javax.swing.JButton registerButton;
     // End of variables declaration//GEN-END:variables
 }

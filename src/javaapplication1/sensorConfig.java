@@ -5,6 +5,8 @@
  */
 package javaapplication1;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 /**
  *
  * @author Snehalreet
@@ -16,6 +18,19 @@ public class sensorConfig extends javax.swing.JFrame {
      */
     public sensorConfig() {
         initComponents();
+        
+        moistureThresTextField.setText(String.valueOf(landing.moistureThreshold));          //displayed in percentage
+        ultrasonicThresTextField.setText(String.valueOf(landing.ultrasonicThreshold));      //displayed in centimeters
+        
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    //System.out.println("WindowClosingDemo.windowClosing");
+                    landing.dashboard.setVisible(true);
+                    //landing.sc.setVisible(false);
+                    dispose();
+                    }
+                });
     }
 
     /**
@@ -33,15 +48,16 @@ public class sensorConfig extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        ultrasonicThresTextField = new javax.swing.JTextField();
+        moistureThresTextField = new javax.swing.JTextField();
+        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        notificationLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(java.awt.Color.white);
@@ -61,7 +77,6 @@ public class sensorConfig extends javax.swing.JFrame {
         );
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\sensor.png")); // NOI18N
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(java.awt.Color.white);
@@ -102,59 +117,69 @@ public class sensorConfig extends javax.swing.JFrame {
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ultrasonicThresTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ultrasonicThresTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ultrasonicThresTextFieldActionPerformed(evt);
+            }
+        });
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        moistureThresTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        moistureThresTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moistureThresTextFieldActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(26, 83, 92));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-        jButton1.setText("GO BACK");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        jButton1.setOpaque(true);
-        jButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+        cancelButton.setBackground(new java.awt.Color(26, 83, 92));
+        cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
+        cancelButton.setText("CANCEL");
+        cancelButton.setBorder(null);
+        cancelButton.setContentAreaFilled(false);
+        cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton1FocusGained(evt);
+                cancelButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton1FocusLost(evt);
+                cancelButtonFocusLost(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(26, 83, 92));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-        jButton2.setText("SAVE CHANGES");
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.setOpaque(true);
-        jButton2.addFocusListener(new java.awt.event.FocusAdapter() {
+        saveButton.setBackground(new java.awt.Color(26, 83, 92));
+        saveButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(249, 251, 242));
+        saveButton.setText("SAVE CHANGES");
+        saveButton.setBorder(null);
+        saveButton.setContentAreaFilled(false);
+        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveButton.setFocusPainted(false);
+        saveButton.setOpaque(true);
+        saveButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton2FocusGained(evt);
+                saveButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton2FocusLost(evt);
+                saveButtonFocusLost(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
-        jLabel5.setBackground(java.awt.Color.white);
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(230, 57, 70));
+        notificationLabel.setBackground(java.awt.Color.white);
+        notificationLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        notificationLabel.setForeground(new java.awt.Color(0, 221, 0));
 
         jLabel3.setBackground(java.awt.Color.white);
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -163,6 +188,10 @@ public class sensorConfig extends javax.swing.JFrame {
         jLabel4.setBackground(java.awt.Color.white);
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(230, 57, 70));
+
+        jLabel5.setBackground(java.awt.Color.white);
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(230, 57, 70));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,24 +216,29 @@ public class sensorConfig extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(moistureThresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(60, 60, 60)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(ultrasonicThresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(433, 433, 433)
+                        .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(221, 221, 221)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(217, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(278, 278, 278)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(290, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,28 +248,33 @@ public class sensorConfig extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(moistureThresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ultrasonicThresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 159, Short.MAX_VALUE))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 82, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(363, 363, 363)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(349, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(288, 288, 288)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(450, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,54 +303,92 @@ public class sensorConfig extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int num1,num2;
+        moistureThresTextField.setText("");
+        ultrasonicThresTextField.setText("");
         jLabel5.setText(" ");
+        jLabel3.setText(" ");
+        jLabel4.setText(" ");
+        notificationLabel.setText(" ");
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        double num1,num2;
+        boolean moistureValid = false, ultrasonicValid = false;
+        jLabel5.setText(" ");
+        notificationLabel.setText(" ");
+        jLabel3.setText(" ");
+        jLabel4.setText(" ");
+        
         try {
-        num1 = Integer.parseInt(jTextField5.getText());
-        if(num1 > 40)
-        jLabel3.setText("Moisture sensor threshold cannot be greater than 40");
-        else
+        num1 = Double.parseDouble(moistureThresTextField.getText());              //accepted in percentage
+        if(num1 > 100)
+        jLabel3.setText("Moisture sensor threshold cannot be greater than 100");
+        else if(num1 < 0)
+        jLabel3.setText("Moisture sensor threshold cannot be negative");
+        else{
            jLabel3.setText(" ");
+           moistureValid = true;
+        }
 
     } catch (NumberFormatException e) {
-        jLabel5.setText("Sensor threshold must be an integer");
+        jLabel5.setText("Sensor threshold must be number");
         jLabel3.setText(" ");
+        moistureValid = false;
     }
         
         try {
-        num2 = Integer.parseInt(jTextField4.getText());
-        if(num2 > 40)
-        jLabel4.setText("Ultrasonic sensor threshold cannot be greater than 40");
-        else
+        num2 = Double.parseDouble(ultrasonicThresTextField.getText());            //accepted in centimeters
+        if(num2 > landing.maxDustbinSize)
+        jLabel4.setText("Ultrasonic sensor threshold cannot be greater than " + landing.maxDustbinSize);
+        else if(num2 < 0)
+        jLabel4.setText("Ultrasonic sensor threshold cannot be negative");
+        else{
            jLabel4.setText(" ");
+           ultrasonicValid = true;
+        }
 
     } catch (NumberFormatException f) {
-        jLabel5.setText("Sensor threshold must be an integer");
+        jLabel5.setText("Sensor threshold must be a number");
         jLabel4.setText(" ");
+        ultrasonicValid = false;
     }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        if(moistureValid && ultrasonicValid){
+            landing.moistureThreshold = Double.parseDouble(moistureThresTextField.getText());           //stored in percentage
+            landing.ultrasonicThreshold = Double.parseDouble(ultrasonicThresTextField.getText());       //stored in centimeters
+            
+            notificationLabel.setText("Changes Saved.");
+            //System.out.println(landing.moistureThreshold + " \t " + landing.ultrasonicThreshold);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void jButton1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusGained
-        jButton1.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton1FocusGained
+    private void cancelButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusGained
+        cancelButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_cancelButtonFocusGained
 
-    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
-        jButton2.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton2FocusGained
+    private void saveButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_saveButtonFocusGained
+        saveButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_saveButtonFocusGained
 
-    private void jButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusLost
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton2FocusLost
+    private void saveButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_saveButtonFocusLost
+        saveButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_saveButtonFocusLost
 
-    private void jButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusLost
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton1FocusLost
+    private void cancelButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusLost
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_cancelButtonFocusLost
+
+    private void moistureThresTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moistureThresTextFieldActionPerformed
+        // TODO add your handling code here:
+        //notificationLabel.setText(" ");
+    }//GEN-LAST:event_moistureThresTextFieldActionPerformed
+
+    private void ultrasonicThresTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ultrasonicThresTextFieldActionPerformed
+        // TODO add your handling code here:
+        //notificationLabel.setText(" ");
+    }//GEN-LAST:event_ultrasonicThresTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,8 +428,7 @@ public class sensorConfig extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -362,7 +438,9 @@ public class sensorConfig extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField moistureThresTextField;
+    private javax.swing.JLabel notificationLabel;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JTextField ultrasonicThresTextField;
     // End of variables declaration//GEN-END:variables
 }
