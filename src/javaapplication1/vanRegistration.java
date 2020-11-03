@@ -5,6 +5,9 @@
  */
 package javaapplication1;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import static javaapplication1.emailValidation.emailValidation;
 
 /**
@@ -18,6 +21,16 @@ public class vanRegistration extends javax.swing.JFrame {
      */
     public vanRegistration() {
         initComponents();
+        
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    //System.out.println("WindowClosingDemo.windowClosing");
+                    landing.dashboard.setVisible(true);
+                    //landing.vr.setVisible(false);
+                    dispose();
+                    }
+                });
     }
 
     /**
@@ -36,15 +49,15 @@ public class vanRegistration extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        emailIdTextField = new javax.swing.JTextField();
+        vanIdTextField = new javax.swing.JTextField();
+        driverNameTextField = new javax.swing.JTextField();
+        cancelButton = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
         lbl_Message = new javax.swing.JLabel();
+        notificationLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 768));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.white);
 
@@ -60,8 +73,6 @@ public class vanRegistration extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 89, Short.MAX_VALUE)
         );
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\van.png")); // NOI18N
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(java.awt.Color.white);
@@ -96,60 +107,60 @@ public class vanRegistration extends javax.swing.JFrame {
             }
         });
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        emailIdTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        emailIdTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                emailIdTextFieldActionPerformed(evt);
             }
         });
 
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        vanIdTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        driverNameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(26, 83, 92));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-        jButton1.setText("GO BACK");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        jButton1.setOpaque(true);
-        jButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+        cancelButton.setBackground(new java.awt.Color(26, 83, 92));
+        cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
+        cancelButton.setText("CANCEL");
+        cancelButton.setBorder(null);
+        cancelButton.setContentAreaFilled(false);
+        cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        cancelButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton1FocusGained(evt);
+                cancelButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton1FocusLost(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelButtonFocusLost(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(26, 83, 92));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-        jButton2.setText("REGISTER");
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.setOpaque(true);
-        jButton2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton2FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton2FocusLost(evt);
+        registerButton.setBackground(new java.awt.Color(26, 83, 92));
+        registerButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        registerButton.setForeground(new java.awt.Color(249, 251, 242));
+        registerButton.setText("REGISTER");
+        registerButton.setBorder(null);
+        registerButton.setContentAreaFilled(false);
+        registerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerButton.setFocusPainted(false);
+        registerButton.setOpaque(true);
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        registerButton.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                registerButtonFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                registerButtonFocusLost(evt);
             }
         });
 
@@ -157,6 +168,10 @@ public class vanRegistration extends javax.swing.JFrame {
         lbl_Message.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lbl_Message.setForeground(new java.awt.Color(230, 57, 70));
         lbl_Message.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        notificationLabel.setBackground(java.awt.Color.white);
+        notificationLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        notificationLabel.setForeground(new java.awt.Color(0, 221, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -175,9 +190,9 @@ public class vanRegistration extends javax.swing.JFrame {
                         .addGap(304, 304, 304)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,13 +200,17 @@ public class vanRegistration extends javax.swing.JFrame {
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(58, 58, 58)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(driverNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(emailIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vanIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbl_Message, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19)))))
                 .addContainerGap(254, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(notificationLabel)
+                .addGap(368, 368, 368))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,23 +222,25 @@ public class vanRegistration extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5)
+                    .addComponent(emailIdTextField)
                     .addComponent(jTextField2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_Message, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(driverNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6))
+                    .addComponent(vanIdTextField))
                 .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(143, 143, 143))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,42 +261,54 @@ public class vanRegistration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        vanIdTextField.setText("");
+        driverNameTextField.setText("");
+        emailIdTextField.setText("");
+        notificationLabel.setText("");
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
-        boolean status = emailValidation(jTextField5.getText());
+        boolean status = emailValidation(emailIdTextField.getText());
            
            if(status == false){
                lbl_Message.setText("Invalid email");
            }
            else{
                lbl_Message.setText("");
+               
+               Van v = new Van();
+               v.ID = vanIdTextField.getText();
+               v.driver = driverNameTextField.getText();
+               v.email = emailIdTextField.getText();
+        
+               landing.van.put(v.ID, v);
+               notificationLabel.setText("Van Registered successfully.");
+               //System.out.println("van registered");
            }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_registerButtonActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void emailIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailIdTextFieldActionPerformed
         // TODO add your handling code here:
            
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_emailIdTextFieldActionPerformed
 
-    private void jButton1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusGained
-        jButton1.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton1FocusGained
+    private void cancelButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusGained
+        cancelButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_cancelButtonFocusGained
 
-    private void jButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusLost
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));    }//GEN-LAST:event_jButton1FocusLost
+    private void cancelButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusLost
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));    }//GEN-LAST:event_cancelButtonFocusLost
 
-    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
-        jButton2.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton2FocusGained
+    private void registerButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerButtonFocusGained
+        registerButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_registerButtonFocusGained
 
-    private void jButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusLost
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton2FocusLost
+    private void registerButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerButtonFocusLost
+        registerButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_registerButtonFocusLost
 
     /**
      * @param args the command line arguments
@@ -315,8 +348,9 @@ public class vanRegistration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField driverNameTextField;
+    private javax.swing.JTextField emailIdTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -324,9 +358,9 @@ public class vanRegistration extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lbl_Message;
+    private javax.swing.JLabel notificationLabel;
+    private javax.swing.JButton registerButton;
+    private javax.swing.JTextField vanIdTextField;
     // End of variables declaration//GEN-END:variables
 }

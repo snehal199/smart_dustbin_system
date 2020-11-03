@@ -5,6 +5,8 @@
  */
 package javaapplication1;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 /**
  *
  * @author Snehalreet
@@ -16,6 +18,19 @@ public class frameworkConfiguration extends javax.swing.JFrame {
      */
     public frameworkConfiguration() {
         initComponents();
+        
+        vanResponseDelayTextField.setText(String.valueOf(landing.vanResponseDelay));                //displaying in minutes
+        dustbinStatusDelayTextField.setText(String.valueOf(landing.dustbinStatusDelay));            //displaying in minutes
+        
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    //System.out.println("WindowClosingDemo.windowClosing");
+                    landing.dashboard.setVisible(true);
+                    //landing.fg.setVisible(false);
+                    dispose();
+                    }
+                });
     }
 
     /**
@@ -33,14 +48,16 @@ public class frameworkConfiguration extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        dustbinStatusDelayTextField = new javax.swing.JTextField();
+        vanResponseDelayTextField = new javax.swing.JTextField();
+        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        notificationLabel = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(java.awt.Color.white);
@@ -58,8 +75,6 @@ public class frameworkConfiguration extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 92, Short.MAX_VALUE)
         );
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Snehalreet\\Documents\\NetBeansProjects\\JavaApplication1\\images\\framework.png")); // NOI18N
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
@@ -87,58 +102,58 @@ public class frameworkConfiguration extends javax.swing.JFrame {
         jTextField3.setText("Framework Configuration");
         jTextField3.setBorder(null);
 
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        dustbinStatusDelayTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        vanResponseDelayTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        vanResponseDelayTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                vanResponseDelayTextFieldActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(26, 83, 92));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-        jButton1.setText("GO BACK");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        jButton1.setOpaque(true);
-        jButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+        cancelButton.setBackground(new java.awt.Color(26, 83, 92));
+        cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
+        cancelButton.setText("CANCEL");
+        cancelButton.setBorder(null);
+        cancelButton.setContentAreaFilled(false);
+        cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelButton.setFocusPainted(false);
+        cancelButton.setOpaque(true);
+        cancelButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton1FocusGained(evt);
+                cancelButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton1FocusLost(evt);
+                cancelButtonFocusLost(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(26, 83, 92));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-        jButton2.setText("SAVE CHANGES");
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.setOpaque(true);
-        jButton2.addFocusListener(new java.awt.event.FocusAdapter() {
+        saveButton.setBackground(new java.awt.Color(26, 83, 92));
+        saveButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(249, 251, 242));
+        saveButton.setText("SAVE CHANGES");
+        saveButton.setBorder(null);
+        saveButton.setContentAreaFilled(false);
+        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveButton.setFocusPainted(false);
+        saveButton.setOpaque(true);
+        saveButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton2FocusGained(evt);
+                saveButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jButton2FocusLost(evt);
+                saveButtonFocusLost(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -154,37 +169,15 @@ public class frameworkConfiguration extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(230, 57, 70));
 
+        notificationLabel.setBackground(java.awt.Color.white);
+        notificationLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        notificationLabel.setForeground(new java.awt.Color(0, 221, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(415, 415, 415)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(228, 228, 228)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(290, 290, 290)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(60, 60, 60)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(148, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,6 +187,35 @@ public class frameworkConfiguration extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(283, 283, 283))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(415, 415, 415)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(228, 228, 228)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(vanResponseDelayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(218, 218, 218)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(dustbinStatusDelayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(60, 60, 60)
+                                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(422, 422, 422)
+                        .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,20 +230,22 @@ public class frameworkConfiguration extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vanResponseDelayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dustbinStatusDelayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,66 +262,93 @@ public class frameworkConfiguration extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void vanResponseDelayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vanResponseDelayTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_vanResponseDelayTextFieldActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        vanResponseDelayTextField.setText("");
+        dustbinStatusDelayTextField.setText("");
+        jLabel5.setText(" ");
+        jLabel3.setText(" ");
+        jLabel4.setText(" ");
+        notificationLabel.setText(" ");
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         int num1,num2;
+        boolean responseDelayValid = false, statusDelayValid = false;
         jLabel5.setText(" ");
+        notificationLabel.setText(" ");
+        jLabel3.setText(" ");
+        jLabel4.setText(" ");
 
         try {
-        num1 = Integer.parseInt(jTextField5.getText());
+        num1 = Integer.parseInt(vanResponseDelayTextField.getText());           //accepting in minutes
         if(num1 > 40)
         jLabel3.setText("Van response delay cannot be greater than 40");
-        else
+        else if(num1 < 0)
+        jLabel3.setText("Van response delay cannot be negative");
+        else{
            jLabel3.setText(" ");
+           responseDelayValid = true;
+        }
 
     } catch (NumberFormatException e) {
         jLabel5.setText("Response Delay must be an integer");
         jLabel3.setText(" ");
+        responseDelayValid = false;
 
     }
         
         try {
-        num2 = Integer.parseInt(jTextField4.getText());
+        num2 = Integer.parseInt(dustbinStatusDelayTextField.getText());         //accepting in minutes
         if(num2 > 40)
         jLabel4.setText("Dustbin response delay cannot be greater than 40");
-        else
+        else if(num2 < 0)
+        jLabel4.setText("Dustbin response delay cannot be negative");
+        else{
            jLabel4.setText(" ");
+           statusDelayValid = true;
+        }
 
     } catch (NumberFormatException f) {
         jLabel5.setText("Response Delay must be an integer");
         jLabel4.setText(" ");
+        statusDelayValid = false;
 
     }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        if(responseDelayValid && statusDelayValid){
+            landing.vanResponseDelay = Integer.parseInt(vanResponseDelayTextField.getText());           //stored in minutes
+            landing.dustbinStatusDelay = Integer.parseInt(dustbinStatusDelayTextField.getText());       //stored in minutes
+            
+            notificationLabel.setText("Changes Saved.");
+            //System.out.println(landing.vanResponseDelay + " \t " + landing.dustbinStatusDelay);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void jButton1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusGained
-        jButton1.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton1FocusGained
+    private void cancelButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusGained
+        cancelButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_cancelButtonFocusGained
 
-    private void jButton1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusLost
-        jButton1.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton1FocusLost
+    private void cancelButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusLost
+        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_cancelButtonFocusLost
 
-    private void jButton2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusLost
-        jButton2.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_jButton2FocusLost
+    private void saveButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_saveButtonFocusLost
+        saveButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_saveButtonFocusLost
 
-    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
-        jButton2.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_jButton2FocusGained
+    private void saveButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_saveButtonFocusGained
+        saveButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_saveButtonFocusGained
 
     /**
      * @param args the command line arguments
@@ -337,8 +388,8 @@ public class frameworkConfiguration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField dustbinStatusDelayTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -348,7 +399,8 @@ public class frameworkConfiguration extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel notificationLabel;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JTextField vanResponseDelayTextField;
     // End of variables declaration//GEN-END:variables
 }
