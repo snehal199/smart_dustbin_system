@@ -15,26 +15,42 @@ public class results extends javax.swing.JFrame {
     /**
      * Creates new form results
      */
-    public results(String key) {
+    String key;
+    public results(String binID) {
         initComponents();
         
+        key = binID;
         binIDLabel.setText(key);
         setProgressBars(key);
     }
     
     private void setProgressBars(String key){
-        //We will get the garbage level and moisture level of the respective dustbin using this key
-        //For now we will generate a random value for the moisture and garbage level
-        
-        Random rand = new Random(); 
-  
-        // Generate random integers in range 0 to 99 
-        int moistureLevel = rand.nextInt(100); 
-        int garbageLevel = rand.nextInt(100); 
-        
-        garbageProgressBar.setValue(garbageLevel);
-        moistureProgressBar.setValue(moistureLevel);
+        Timer timer = new Timer(); 
+        TimerTask task = new Helper(); 
+          
+        timer.schedule(task, 1, 1000); 
     }
+    
+    class Helper extends TimerTask 
+    { 
+        @Override
+        public void run() 
+        { 
+            //The local hashMap landing.dustbin contains the updated values. Here we just get them from the hashMap
+        
+            int moistureLevel = (int)landing.dustbin.get(key).sensedMoisture;
+            int garbageLevel = (int)landing.dustbin.get(key).sensedGarbageDepth;
+            
+            garbageProgressBar.setValue(garbageLevel);
+            moistureProgressBar.setValue(moistureLevel);
+            
+            if(landing.dustbin.get(key).full){
+                //Display Status full(/empty) on the screen
+            }
+        
+            //Display value of landing.dustbin.get(key).moisture (i.e., "Dry"/"Wet" on the screen
+        } 
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.

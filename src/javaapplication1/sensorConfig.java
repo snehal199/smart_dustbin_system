@@ -77,6 +77,7 @@ public class sensorConfig extends javax.swing.JFrame {
         );
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\sensor.png")); // NOI18N
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(java.awt.Color.white);

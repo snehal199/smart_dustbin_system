@@ -73,6 +73,8 @@ public class dustbinRegistration extends javax.swing.JFrame {
             .addGap(0, 92, Short.MAX_VALUE)
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\dustbin.png")); // NOI18N
+
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -220,7 +222,7 @@ public class dustbinRegistration extends javax.swing.JFrame {
                     .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -251,6 +253,10 @@ public class dustbinRegistration extends javax.swing.JFrame {
         d.ID = idTextField.getText();
         d.location = locationTextField.getText();
         d.dimension = dimensionsTextField.getText();
+        d.sensedGarbageDepth = 80.0;
+        d.sensedMoisture = 45.0;
+        d.moisture = "Dry";
+        d.full = false;
         
         landing.dustbin.put(d.ID, d);
         notificationLabel.setText("Dustbin Registered successfully.");

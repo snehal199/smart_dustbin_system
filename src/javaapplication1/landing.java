@@ -24,13 +24,15 @@ public class landing extends javax.swing.JFrame {
     static Map<String, Dustbin> dustbin = new HashMap<String, Dustbin>();
     static Map<String, Van> van = new HashMap<String, Van>();
     static double moistureThreshold = 61;                 //in percentage
-    static double ultrasonicThreshold = 15;               //distance in centimeters
+    static double ultrasonicThreshold = 15;               //depth in centimeters
     static int vanResponseDelay = 15;                    //in minutes
     static int dustbinStatusDelay = 20;                  //in minutes
     static double maxDustbinSize = 80.0;                      //in centimeters
     static String defaultBinKey = "00";
     static String defaultVanKey = "00";
-
+    
+    static Timer timer;
+    static TimerTask task;
     /**
      * Creates new form landing
      */
@@ -128,6 +130,7 @@ public class landing extends javax.swing.JFrame {
         );
 
         frameworkConfigButton.setBackground(new java.awt.Color(255, 255, 255));
+        frameworkConfigButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\framework.png")); // NOI18N
         frameworkConfigButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         frameworkConfigButton.setFocusPainted(false);
         frameworkConfigButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -145,6 +148,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         registerVanButton.setBackground(new java.awt.Color(255, 255, 255));
+        registerVanButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\van.png")); // NOI18N
         registerVanButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerVanButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -161,6 +165,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         sensorConfigButton.setBackground(new java.awt.Color(255, 255, 255));
+        sensorConfigButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\sensor.png")); // NOI18N
         sensorConfigButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sensorConfigButton.setFocusPainted(false);
         sensorConfigButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -178,6 +183,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         registerDustbinButton.setBackground(new java.awt.Color(255, 255, 255));
+        registerDustbinButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\dustbin.png")); // NOI18N
         registerDustbinButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerDustbinButton.setFocusPainted(false);
         registerDustbinButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -195,6 +201,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         startMonitorButton.setBackground(new java.awt.Color(255, 255, 255));
+        startMonitorButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\start.png")); // NOI18N
         startMonitorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         startMonitorButton.setFocusPainted(false);
         startMonitorButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -212,6 +219,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         stopMonitorButton.setBackground(new java.awt.Color(255, 255, 255));
+        stopMonitorButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\stop.png")); // NOI18N
         stopMonitorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stopMonitorButton.setFocusPainted(false);
         stopMonitorButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -284,37 +292,41 @@ public class landing extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(242, 242, 242)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(startMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(registerDustbinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sensorConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(2, 2, 2)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(sensorConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(96, 96, 96))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)))
-                        .addGap(96, 96, 96))
+                                .addComponent(registerDustbinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(startMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(99, 99, 99)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(126, 126, 126)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(registerVanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(frameworkConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(stopMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(242, Short.MAX_VALUE))
+                            .addComponent(registerVanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(frameworkConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,7 +338,7 @@ public class landing extends javax.swing.JFrame {
                         .addComponent(frameworkConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(53, 53, 53)
                         .addComponent(registerVanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,9 +348,9 @@ public class landing extends javax.swing.JFrame {
                         .addComponent(sensorConfigButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addGap(43, 43, 43)
                         .addComponent(registerDustbinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addComponent(startMonitorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -346,7 +358,7 @@ public class landing extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 72, Short.MAX_VALUE))
+                .addGap(0, 66, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -392,6 +404,11 @@ public class landing extends javax.swing.JFrame {
         dashboard = this;
         dashboard.setVisible(false);
         stpm.setVisible(true);
+        
+        //NOTE
+        //task.cancel();          //stops monitoring
+        //timer.cancel();         //stops monitoring
+        
     }//GEN-LAST:event_stopMonitorButtonActionPerformed
 
     private void frameworkConfigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frameworkConfigButtonActionPerformed
@@ -500,8 +517,16 @@ public class landing extends javax.swing.JFrame {
         d.ID = defaultBinKey;
         d.dimension = "80*20*20";
         d.location = "cc3 main entrance";
+        d.sensedGarbageDepth = 80.0;
+        d.sensedMoisture = 45.0;
+        d.moisture = "Dry";
+        d.full = false;
         
         dustbin.put(defaultBinKey, d);
+        
+        timer = new Timer(); 
+        task = new SensorUpdate(); 
+        timer.schedule(task, 1000, 5000); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
