@@ -14,5 +14,9 @@ public class Dustbin {
     String ID;
     String location;
     String dimension;
-    
+    double sensedMoisture;              //in percentage
+    double sensedGarbageDepth;          //in centimeters
+    String moisture;                    //stores dry/wet status
+    boolean full;                      //true/false for full status
+    int delay=0;
 }

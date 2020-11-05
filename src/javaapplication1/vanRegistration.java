@@ -74,6 +74,8 @@ public class vanRegistration extends javax.swing.JFrame {
             .addGap(0, 89, Short.MAX_VALUE)
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\van.png")); // NOI18N
+
         jTextField1.setEditable(false);
         jTextField1.setBackground(java.awt.Color.white);
         jTextField1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
