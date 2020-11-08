@@ -524,6 +524,13 @@ public class landing extends javax.swing.JFrame {
         
         dustbin.put(defaultBinKey, d);
         
+        Van v = new Van();
+        v.ID = "0";
+        v.driver = "Rishika Agarwal";
+        v.email = "iit2019171@iiita.ac.in";
+        
+        van.put("0", v);
+        
         timer = new Timer(); 
         task = new SensorUpdate(); 
         timer.schedule(task, 1000, 5000); 
