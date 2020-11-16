@@ -44,16 +44,13 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="notificationLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="368" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="392" max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="304" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -73,21 +70,26 @@
                                       <Component id="driverNameTextField" min="-2" pref="262" max="-2" attributes="0"/>
                                       <Component id="emailIdTextField" min="-2" pref="262" max="-2" attributes="0"/>
                                       <Component id="vanIdTextField" min="-2" pref="262" max="-2" attributes="0"/>
+                                      <Component id="nameValidation" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_Message" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
+                                      <Component id="idValidation" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="lbl_Message" min="-2" pref="222" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="392" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="emptyErrorLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="254" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="notificationLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="368" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -99,7 +101,9 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="emptyErrorLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="emailIdTextField" max="32767" attributes="0"/>
                       <Component id="jTextField2" max="32767" attributes="0"/>
@@ -107,16 +111,20 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lbl_Message" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
-                      <Component id="driverNameTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="driverNameTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="nameValidation" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="vanIdTextField" alignment="3" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="idValidation" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cancelButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="registerButton" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
@@ -254,6 +262,9 @@
               <Font name="Arial" size="14" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="driverNameTextFieldActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="cancelButton">
           <Properties>
@@ -317,7 +328,7 @@
               <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="18" style="1"/>
+              <Font name="Arial" size="18" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="46" green="39" red="e6" type="rgb"/>
@@ -331,11 +342,44 @@
               <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="18" style="1"/>
+              <Font name="Arial" size="18" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="dd" red="0" type="rgb"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="emptyErrorLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="46" green="39" red="e6" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="nameValidation">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="46" green="39" red="e6" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="idValidation">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="18" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="46" green="39" red="e6" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
         </Component>
       </SubComponents>

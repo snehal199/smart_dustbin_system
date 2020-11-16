@@ -20,6 +20,7 @@ public class stopMonitoring extends javax.swing.JFrame {
      */
     public stopMonitoring() {
         initComponents();
+        logTextArea.setText(landing.logReport);
         
         this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -47,7 +48,7 @@ public class stopMonitoring extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        logTextArea = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -96,12 +97,12 @@ public class stopMonitoring extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(7, 59, 76));
         jLabel2.setText("Stop Monitoring");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(7, 59, 76));
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        logTextArea.setEditable(false);
+        logTextArea.setColumns(20);
+        logTextArea.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        logTextArea.setForeground(new java.awt.Color(7, 59, 76));
+        logTextArea.setRows(5);
+        jScrollPane1.setViewportView(logTextArea);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(7, 59, 76));
@@ -113,20 +114,21 @@ public class stopMonitoring extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(412, 412, 412)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(216, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
+                        .addGap(412, 412, 412)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(419, 419, 419)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(206, 206, 206))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,11 +140,11 @@ public class stopMonitoring extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,6 +218,6 @@ public class stopMonitoring extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea logTextArea;
     // End of variables declaration//GEN-END:variables
 }
