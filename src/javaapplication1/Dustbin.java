@@ -14,9 +14,12 @@ public class Dustbin {
     String ID;
     String location;
     String dimension;
-    double sensedMoisture;              //in percentage
-    double sensedGarbageDepth;          //in centimeters
-    String moisture;                    //stores dry/wet status
-    boolean full;                      //true/false for full status
+    double sensedMoisture = 45.0;              //in percentage
+    double sensedGarbageDepth = 80.0;          //in centimeters
+    String moisture = "Dry";                    //stores dry/wet status
+    boolean full = false;                      //true/false for full status
     int delay=0;
+    boolean isMailSentToVan = false;
+    boolean isMailSentToAuthority = false;
+    String mailSentToVanId = "";
 }

@@ -23,6 +23,8 @@ public class landing extends javax.swing.JFrame {
     
     static Map<String, Dustbin> dustbin = new HashMap<String, Dustbin>();
     static Map<String, Van> van = new HashMap<String, Van>();
+    static ArrayList<String> vanID = new ArrayList<String>();
+    static int vanIDIndex = 0;                           //current van for next mail
     static double moistureThreshold = 61;                 //in percentage
     static double ultrasonicThreshold = 15;               //depth in centimeters
     static int vanResponseDelay = 15;                    //in minutes
@@ -33,6 +35,8 @@ public class landing extends javax.swing.JFrame {
     
     static Timer timer;
     static TimerTask task;
+    
+    static String logReport = "";
     /**
      * Creates new form landing
      */
@@ -517,10 +521,6 @@ public class landing extends javax.swing.JFrame {
         d.ID = defaultBinKey;
         d.dimension = "80*20*20";
         d.location = "cc3 main entrance";
-        d.sensedGarbageDepth = 80.0;
-        d.sensedMoisture = 45.0;
-        d.moisture = "Dry";
-        d.full = false;
         
         dustbin.put(defaultBinKey, d);
         
@@ -530,6 +530,7 @@ public class landing extends javax.swing.JFrame {
         v.email = "iit2019171@iiita.ac.in";
         
         van.put("0", v);
+        vanID.add("0");
         
         timer = new Timer(); 
         task = new SensorUpdate(); 

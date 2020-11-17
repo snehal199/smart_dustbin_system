@@ -7,6 +7,9 @@ package javaapplication1;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author Snehalreet
@@ -52,9 +55,12 @@ public class dustbinRegistration extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         notificationLabel = new javax.swing.JLabel();
+        errorLabel = new javax.swing.JLabel();
+        idValidation = new javax.swing.JLabel();
+        dimensionsValidation = new javax.swing.JLabel();
+        locationValidation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
 
         jPanel1.setBackground(java.awt.Color.white);
@@ -156,34 +162,30 @@ public class dustbinRegistration extends javax.swing.JFrame {
         });
 
         notificationLabel.setBackground(java.awt.Color.white);
-        notificationLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        notificationLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         notificationLabel.setForeground(new java.awt.Color(0, 221, 0));
+
+        errorLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        errorLabel.setForeground(new java.awt.Color(230, 57, 70));
+        errorLabel.setText(" ");
+
+        idValidation.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        idValidation.setForeground(new java.awt.Color(230, 57, 70));
+        idValidation.setText(" ");
+
+        dimensionsValidation.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        dimensionsValidation.setForeground(new java.awt.Color(230, 57, 70));
+        dimensionsValidation.setText(" ");
+
+        locationValidation.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        locationValidation.setForeground(new java.awt.Color(230, 57, 70));
+        locationValidation.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(422, 422, 422)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(384, 384, 384)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(137, 137, 137)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(idTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(locationTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dimensionsTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(230, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,6 +197,33 @@ public class dustbinRegistration extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(notificationLabel)
                         .addGap(359, 359, 359))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(422, 422, 422)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(384, 384, 384)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(401, 401, 401)
+                        .addComponent(errorLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(137, 137, 137)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idValidation)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(idTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(locationTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dimensionsTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dimensionsValidation)
+                            .addComponent(locationValidation))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,19 +233,27 @@ public class dustbinRegistration extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(29, 29, 29)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idTextField)
                     .addComponent(jTextField4))
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(idValidation)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(locationTextField)
                     .addComponent(jTextField3))
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(locationValidation)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dimensionsTextField))
-                .addGap(71, 71, 71)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dimensionsValidation)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,22 +282,64 @@ public class dustbinRegistration extends javax.swing.JFrame {
         locationTextField.setText("");
         dimensionsTextField.setText("");
         notificationLabel.setText("");
+        errorLabel.setText(" ");
+        idValidation.setText(" ");
+        locationValidation.setText(" ");
+        dimensionsValidation.setText(" ");
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
-        Dustbin d = new Dustbin();
-        d.ID = idTextField.getText();
-        d.location = locationTextField.getText();
-        d.dimension = dimensionsTextField.getText();
-        d.sensedGarbageDepth = 80.0;
-        d.sensedMoisture = 45.0;
-        d.moisture = "Dry";
-        d.full = false;
+        notificationLabel.setText("");
+        errorLabel.setText(" ");
+        idValidation.setText(" ");
+        locationValidation.setText(" ");
+        dimensionsValidation.setText(" ");
         
-        landing.dustbin.put(d.ID, d);
-        notificationLabel.setText("Dustbin Registered successfully.");
-        //System.out.println("dustbin registered");
+        int b = 1;
+        String regex = "^.*[a-zA-Z0-9]+.*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher m1 = pattern.matcher(idTextField.getText());
+        Matcher m2 = pattern.matcher(locationTextField.getText());
+        Matcher m3 = pattern.matcher(dimensionsTextField.getText());
+        
+        if(idTextField.getText().equals("") || locationTextField.getText().equals("") || dimensionsTextField.getText().equals("")){
+            errorLabel.setText("All fields are mandatory");
+            b=0;
+        }
+        else{
+            if(!m1.matches()){
+                idValidation.setText("Enter a valid ID");
+                b=0;
+            }else if(landing.dustbin.containsKey(idTextField.getText().trim())){
+                idValidation.setText("ID already exists");
+                b=0;
+            }
+            if(!m2.matches()){
+                locationValidation.setText("Enter a valid location");
+                b=0;
+            }
+            if(!m3.matches()){
+                dimensionsValidation.setText("Enter valid dimensions");
+                b=0;
+            }
+        }
+        
+        if(b==1){
+            Dustbin d = new Dustbin();
+            d.ID = idTextField.getText().trim();
+            d.location = locationTextField.getText().trim();
+            d.dimension = dimensionsTextField.getText().trim();
+        
+            landing.dustbin.put(d.ID, d);
+            notificationLabel.setText("Dustbin Registered successfully.");
+            //System.out.println("dustbin registered");
+            
+            //CREATE LOG
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            String log = ts + " : Dustbin: " + d.ID + " registered.\n";
+            landing.logReport += log;
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void cancelButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusGained
@@ -319,7 +398,10 @@ public class dustbinRegistration extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField dimensionsTextField;
+    private javax.swing.JLabel dimensionsValidation;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel idValidation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -328,6 +410,7 @@ public class dustbinRegistration extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField locationTextField;
+    private javax.swing.JLabel locationValidation;
     private javax.swing.JLabel notificationLabel;
     private javax.swing.JButton registerButton;
     // End of variables declaration//GEN-END:variables

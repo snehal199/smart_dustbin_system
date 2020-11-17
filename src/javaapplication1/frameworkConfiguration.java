@@ -7,6 +7,7 @@ package javaapplication1;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
 /**
  *
  * @author Snehalreet
@@ -333,6 +334,13 @@ public class frameworkConfiguration extends javax.swing.JFrame {
             
             notificationLabel.setText("Changes Saved.");
             //System.out.println(landing.vanResponseDelay + " \t " + landing.dustbinStatusDelay);
+            
+            //CREATE LOG
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            String log = ts + " : Framework Configured. "
+                    + "[Van response delay= " + landing.vanResponseDelay 
+                    + "min; Dustbin status delay=" + landing.dustbinStatusDelay + "min]\n";
+            landing.logReport += log;
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 

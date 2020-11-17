@@ -5,6 +5,7 @@
  */
 
 package javaapplication1;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -28,6 +29,9 @@ public class SensorUpdate extends TimerTask {
     	
     	int vanID = 0;
     	Mailer obj = new Mailer();
+        Timestamp ts;
+        String log;
+        
         for (Map.Entry<String, Dustbin> entry : landing.dustbin.entrySet()) {
             //System.out.println(entry.getKey() + " = " + entry.getValue());
             Random rand = new Random(); 
@@ -39,33 +43,65 @@ public class SensorUpdate extends TimerTask {
             if(entry.getValue().sensedGarbageDepth >= landing.ultrasonicThreshold){
                 //System.out.println(entry.getValue().ID + " is full!");
                 entry.getValue().full = true;
-                String van_key = Integer.toString(vanID);
-                if(!landing.van.containsKey(van_key))
-                	vanID = 0;
-                van_key = Integer.toString(vanID);
-                //System.out.println(landing.van.get("0").email);
-                String email_to = landing.van.get(van_key).email;
-                String sub = "Dustbin number : " + entry.getValue().ID + " is full" ;
-                String text = "Dustbin number : " + entry.getValue().ID + " has reached the threshold of " + landing.ultrasonicThreshold + "cm. Clean it as soon as possible.";
-                obj.send(email_from, password, email_to, sub, text);
-                vanID++;
-            }else
-                entry.getValue().full = false;
-            
-            //Do this part better!
-            //To check delay status
-            if(entry.getValue().full){
                 entry.getValue().delay++;
                 
-                if(entry.getValue().delay > landing.dustbinStatusDelay){
+                //Add Log
+                ts = new Timestamp(System.currentTimeMillis());
+                log = ts + " : Dustbin: " + entry.getValue().ID + " detected full.\n";
+                landing.logReport += log;
+                
+                //Mailing
+                if(!entry.getValue().isMailSentToVan){
+                    String van_key = landing.vanID.get(landing.vanIDIndex);
+                    /*
+                    if(!landing.van.containsKey(van_key))
+                        vanID = 0;
+                    van_key = Integer.toString(vanID);
+                            */
+                    landing.vanIDIndex++;
+                    if(landing.vanIDIndex >= landing.vanID.size())
+                        landing.vanIDIndex = 0;
+                    //System.out.println(landing.van.get("0").email);
+                    String email_to = landing.van.get(van_key).email;
+                    String sub = "Dustbin number : " + entry.getValue().ID + " is full" ;
+                    String text = "Dustbin number : " + entry.getValue().ID + " placed at: " + entry.getValue().location + " has reached the threshold of " + landing.ultrasonicThreshold + "cm. Clean it as soon as possible.";
+                    obj.send(email_from, password, email_to, sub, text);
+                    entry.getValue().isMailSentToVan = true;
+                    //entry.getValue().mailSentToVanId = van_key;
+                    
+                    //Add Log
+                    ts = new Timestamp(System.currentTimeMillis());
+                    log = ts + " : Mail sent to van: " + van_key + " To empty the dustbin: " + entry.getValue().ID + "\n";
+                    landing.logReport += log;
+                }
+                
+                if(!entry.getValue().isMailSentToAuthority && entry.getValue().delay*5 >= landing.vanResponseDelay){
+                    //Send mail to authority
                     String email_to = "iit2019171@iiita.ac.in";
                     String sub = "Delay in cleaning of Dustbin Number : " + entry.getValue().ID;
                     String text = "The dustbin status delay for the dustbin number :" + entry.getValue().ID + " has crossed the given threshold of " + landing.dustbinStatusDelay + "mins.";
                     obj.send(email_from, password, email_to, sub, text);
+                    entry.getValue().isMailSentToAuthority = true;
+                    
+                    //Add Log
+                    ts = new Timestamp(System.currentTimeMillis());
+                    log = ts + " : Mail sent to the authority notifying that dustbin status has been delayed for the dustbin: " + entry.getValue().ID + "\n";
+                    landing.logReport += log;
                 }
-            }else{
+                
+            }else if(entry.getValue().delay != 0){
+                entry.getValue().full = false;
                 entry.getValue().delay = 0;
+                entry.getValue().isMailSentToVan = false;
+                entry.getValue().isMailSentToAuthority = false;
+                //entry.getValue().mailSentToVanId = "";
+                
+                //Add Log - bin has been emptied
+                ts = new Timestamp(System.currentTimeMillis());
+                log = ts + " : Dustbin: " + entry.getValue().ID + " has been emptied. \n";
+                landing.logReport += log;
             }
+            
         }
     }
     

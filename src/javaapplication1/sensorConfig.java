@@ -7,6 +7,7 @@ package javaapplication1;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
 /**
  *
  * @author Snehalreet
@@ -362,6 +363,13 @@ public class sensorConfig extends javax.swing.JFrame {
             
             notificationLabel.setText("Changes Saved.");
             //System.out.println(landing.moistureThreshold + " \t " + landing.ultrasonicThreshold);
+            
+            //CREATE LOG
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            String log = ts + " : Sensors Configured. "
+                    + "[Moisture Threshold= " + landing.moistureThreshold 
+                    + "%; Ultrasonic Threshold=" + landing.ultrasonicThreshold + "cm]\n";
+            landing.logReport += log;
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
