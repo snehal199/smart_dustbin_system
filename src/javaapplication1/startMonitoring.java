@@ -7,6 +7,10 @@ package javaapplication1;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -216,15 +220,25 @@ public class startMonitoring extends javax.swing.JFrame {
     }//GEN-LAST:event_startButtonFocusLost
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        // TODO add your handling code here:
-        
-        String binID = binIDTextField.getText();
-        if(!landing.dustbin.containsKey(binID))
-            errorLabel.setText("Dustbin not registered.");
-        else{
-            errorLabel.setText(" ");
-            results obj = new results(binID);
-            obj.setVisible(true);
+        try {                                            
+            // TODO add your handling code here:
+            
+            String binID = binIDTextField.getText();
+            String qu = "SELECT * FROM DUSTBIN WHERE ID = '" + binID + "'";
+            ResultSet rs = landing.databaseHandler.execQuery(qu);
+            try {
+                if(!rs.next())
+                    errorLabel.setText("Dustbin not registered.");
+                else{
+                    errorLabel.setText(" ");
+                    results obj = new results(binID);
+                    obj.setVisible(true);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(startMonitoring.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(startMonitoring.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_startButtonActionPerformed
 

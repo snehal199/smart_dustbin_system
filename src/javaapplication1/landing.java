@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package javaapplication1;
+import java.net.URL;
 import java.util.*;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -21,9 +21,8 @@ public class landing extends javax.swing.JFrame {
     static startMonitoring sttm;
     static stopMonitoring stpm;
     
-    static Map<String, Dustbin> dustbin = new HashMap<String, Dustbin>();
-    static Map<String, Van> van = new HashMap<String, Van>();
-    static ArrayList<String> vanID = new ArrayList<String>();
+    static DatabaseHandler databaseHandler;
+    
     static int vanIDIndex = 0;                           //current van for next mail
     static double moistureThreshold = 61;                 //in percentage
     static double ultrasonicThreshold = 15;               //depth in centimeters
@@ -42,6 +41,7 @@ public class landing extends javax.swing.JFrame {
      */
     public landing() {
         initComponents();
+        initialize();
     }
 
     /**
@@ -378,7 +378,10 @@ public class landing extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void initialize(){
+        databaseHandler = new DatabaseHandler();
+    }
     private void sensorConfigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorConfigButtonActionPerformed
         // TODO add your handling code here:
         sc = new sensorConfig();
@@ -517,20 +520,6 @@ public class landing extends javax.swing.JFrame {
             }
         });
         
-        Dustbin d = new Dustbin();
-        d.ID = defaultBinKey;
-        d.dimension = "80*20*20";
-        d.location = "cc3 main entrance";
-        
-        dustbin.put(defaultBinKey, d);
-        
-        Van v = new Van();
-        v.ID = "0";
-        v.driver = "Rishika Agarwal";
-        v.email = "iit2019171@iiita.ac.in";
-        
-        van.put("0", v);
-        vanID.add("0");
         
         timer = new Timer(); 
         task = new SensorUpdate(); 
