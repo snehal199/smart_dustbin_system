@@ -40,32 +40,23 @@ public class results extends javax.swing.JFrame {
         @Override
         public void run() 
         { 
-            try { 
-                //The local hashMap landing.dustbin contains the updated values. Here we just get them from the hashMap
-                String qu = "SELECT * FROM DUSTBIN WHERR ID = '" + key + "'";
-                ResultSet rs = landing.databaseHandler.execQuery(qu);
-                int moistureLevel = 0;
-                int garbageLevel = 0;
-                try {
-                    if(rs.next()){
-                        moistureLevel = (int)rs.getDouble("sensedMoisture");
-                        garbageLevel = (int)rs.getDouble("sensedGarbageLevel");
-                        if(rs.getBoolean("isFull")){
-                            //Display Status full(/empty) on the screen
-                        }
+            String qu = "SELECT * FROM DUSTBIN WHERE ID = '" + key + "'";
+            ResultSet rs = landing.databaseHandler.execQuery(qu);
+            int moistureLevel = 0;
+            int garbageLevel = 0;
+            try {
+                if(rs.next()){
+                    moistureLevel = (int)rs.getDouble("sensedMoisture");
+                    garbageLevel = (int)rs.getDouble("sensedGarbageDepth");
+                    if(rs.getBoolean("isFull")){
+                        //Display Status full(/empty) on the screen
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(results.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                garbageProgressBar.setValue(garbageLevel);
-                moistureProgressBar.setValue(moistureLevel);
-                
-                
-                //Display value of landing.dustbin.get(key).moisture (i.e., "Dry"/"Wet" on the screen
             } catch (SQLException ex) {
                 Logger.getLogger(results.class.getName()).log(Level.SEVERE, null, ex);
             }
+            garbageProgressBar.setValue(garbageLevel);
+            moistureProgressBar.setValue(moistureLevel);
         } 
     } 
 

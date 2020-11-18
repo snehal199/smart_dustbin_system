@@ -57,8 +57,8 @@ public class DatabaseHandler {
                         + "     moisture varchar(2000) default 'Dry',\n"
                         + "     isFull boolean default false,\n"
                         + "     delay integer default 0,\n"
-                        + "     isMainSentToVan boolean default false,\n"
-                        + "     isMainSentToAuthority boolean default false\n"
+                        + "     isMailSentToVan boolean default false,\n"
+                        + "     isMailSentToAuthority boolean default false\n"
                         + "  )");
             }
         } catch (SQLException e) {
@@ -98,7 +98,7 @@ public class DatabaseHandler {
     
    // Functin execQuery(Always returns something)
     public ResultSet execQuery(String query){
-        System.out.println("1");
+//        System.out.println("1");
         ResultSet result;
         try{
             stmt = conn.createStatement();
