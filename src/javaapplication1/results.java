@@ -27,12 +27,12 @@ public class results extends javax.swing.JFrame {
         binIDLabel.setText(key);
         setProgressBars(key);
     }
-    
+
     private void setProgressBars(String key){
         Timer timer = new Timer(); 
         TimerTask task = new Helper(); 
           
-        timer.schedule(task, 1, 1000); 
+        timer.schedule(task, 0, 1000000000); 
     }
     
     class Helper extends TimerTask 
@@ -240,6 +240,13 @@ public class results extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+
+        try {
+          startMonitoring s = new startMonitoring();
+                  s.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(results.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 

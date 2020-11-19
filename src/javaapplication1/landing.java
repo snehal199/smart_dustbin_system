@@ -5,7 +5,10 @@
  */
 package javaapplication1;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -398,11 +401,16 @@ public class landing extends javax.swing.JFrame {
     }//GEN-LAST:event_registerDustbinButtonActionPerformed
 
     private void startMonitorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startMonitorButtonActionPerformed
-        // TODO add your handling code here:
-        sttm = new startMonitoring();
-        dashboard = this;
-        dashboard.setVisible(false);
-        sttm.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            sttm = new startMonitoring();
+        } catch (SQLException ex) {
+            Logger.getLogger(landing.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            dashboard = this;
+            dashboard.setVisible(false);
+            sttm.setVisible(true);
+        
     }//GEN-LAST:event_startMonitorButtonActionPerformed
 
     private void stopMonitorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopMonitorButtonActionPerformed

@@ -5,12 +5,22 @@
  */
 package javaapplication1;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import static java.time.Clock.system;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,11 +28,28 @@ import java.util.logging.Logger;
  */
 public class startMonitoring extends javax.swing.JFrame {
 
+    static int i;
+    int count =0 ;
+    static startMonitoring base ;
+    final String DB_URL = "jdbc:derby:database;create=true";
+    String qu_dustbin ="SELECT * FROM DUSTBIN";
+    String qu_c="SELECT COUNT(*) FROM DUSTBIN";
+    ResultSet rs_c=landing.databaseHandler.execQuery(qu_c);
+    Connection conn = DriverManager.getConnection(DB_URL);
+//    conn.setAutoCommit(false);
+    PreparedStatement statement = conn.prepareStatement(qu_dustbin);
+    ResultSet rs_dustbin = statement.executeQuery();
     /**
      * Creates new form startMonitoring
      */
-    public startMonitoring() {
+    public startMonitoring() throws SQLException{
         initComponents();
+        base = this;
+        
+        GridPanel pane = new GridPanel();
+        pane.setBounds(320,220,370,234);
+        pane.setBackground(Color.white);
+        this.add(pane);
         
         this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -34,6 +61,7 @@ public class startMonitoring extends javax.swing.JFrame {
                     }
                 });
     }
+         
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,11 +76,7 @@ public class startMonitoring extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        binIDTextField = new javax.swing.JTextField();
-        cancelButton = new javax.swing.JButton();
-        startButton = new javax.swing.JButton();
-        errorLabel = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,68 +95,32 @@ public class startMonitoring extends javax.swing.JFrame {
             .addGap(0, 90, Short.MAX_VALUE)
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\start.png")); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(7, 59, 76));
         jLabel2.setText("Start Monitoring");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(7, 59, 76));
-        jLabel3.setText("Dustbin ID:");
-        jLabel3.setFocusable(false);
-
-        binIDTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        cancelButton.setBackground(new java.awt.Color(26, 83, 92));
-        cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
-        cancelButton.setText("CANCEL");
-        cancelButton.setBorder(null);
-        cancelButton.setContentAreaFilled(false);
-        cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cancelButton.setFocusPainted(false);
-        cancelButton.setOpaque(true);
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-        cancelButton.addFocusListener(new java.awt.event.FocusAdapter() {
+        backButton.setBackground(new java.awt.Color(26, 83, 92));
+        backButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        backButton.setForeground(new java.awt.Color(249, 251, 242));
+        backButton.setText("GO BACK");
+        backButton.setBorder(null);
+        backButton.setContentAreaFilled(false);
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton.setFocusPainted(false);
+        backButton.setOpaque(true);
+        backButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                cancelButtonFocusGained(evt);
+                backButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                cancelButtonFocusLost(evt);
+                backButtonFocusLost(evt);
             }
         });
-
-        startButton.setBackground(new java.awt.Color(26, 83, 92));
-        startButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        startButton.setForeground(new java.awt.Color(249, 251, 242));
-        startButton.setText("START");
-        startButton.setBorder(null);
-        startButton.setContentAreaFilled(false);
-        startButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        startButton.setFocusPainted(false);
-        startButton.setOpaque(true);
-        startButton.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                startButtonFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                startButtonFocusLost(evt);
-            }
-        });
-        startButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
-
-        errorLabel.setBackground(java.awt.Color.white);
-        errorLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        errorLabel.setForeground(new java.awt.Color(230, 57, 70));
 
         javax.swing.GroupLayout JPanel1Layout = new javax.swing.GroupLayout(JPanel1);
         JPanel1.setLayout(JPanel1Layout);
@@ -140,27 +128,12 @@ public class startMonitoring extends javax.swing.JFrame {
             JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(JPanel1Layout.createSequentialGroup()
-                .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPanel1Layout.createSequentialGroup()
-                        .addGap(412, 412, 412)
-                        .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)))
-                    .addGroup(JPanel1Layout.createSequentialGroup()
-                        .addGap(330, 330, 330)
-                        .addComponent(jLabel3)
-                        .addGap(83, 83, 83)
-                        .addComponent(binIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(JPanel1Layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(253, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(389, 389, 389))
+                .addGap(412, 412, 412)
+                .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addContainerGap(424, Short.MAX_VALUE))
         );
         JPanel1Layout.setVerticalGroup(
             JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,17 +143,9 @@ public class startMonitoring extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(61, 61, 61)
-                .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(binIDTextField))
-                .addGap(30, 30, 30)
-                .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 152, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,51 +156,70 @@ public class startMonitoring extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusGained
-        cancelButton.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_cancelButtonFocusGained
+    private void backButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_backButtonFocusGained
+        backButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_backButtonFocusGained
 
-    private void cancelButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusLost
-        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_cancelButtonFocusLost
+    private void backButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_backButtonFocusLost
+        backButton.setForeground(new java.awt.Color(249, 251, 242));
+    }//GEN-LAST:event_backButtonFocusLost
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        binIDTextField.setText("");
-        errorLabel.setText("");
-    }//GEN-LAST:event_cancelButtonActionPerformed
+        landing.dashboard.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
-    private void startButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startButtonFocusGained
-        startButton.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_startButtonFocusGained
 
-    private void startButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startButtonFocusLost
-        startButton.setForeground(new java.awt.Color(249, 251, 242));
-    }//GEN-LAST:event_startButtonFocusLost
-
-    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        String binID = binIDTextField.getText();
-        String qu = "SELECT * FROM DUSTBIN WHERE ID = '" + binID + "'";
-        ResultSet rs = landing.databaseHandler.execQuery(qu);
-        try {
-            if(!rs.next())
-                errorLabel.setText("Dustbin not registered.");
-            else{
-                errorLabel.setText(" ");
-                results obj = new results(binID);
-                obj.setVisible(true);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(startMonitoring.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_startButtonActionPerformed
-
+    private class GridPanel extends javax.swing.JPanel{
+        GridPanel() throws SQLException{
+            
+            if(rs_c.next())
+            count = rs_c.getInt(1);
+//            System.out.println(count);
+            rs_c.close();
+            String id = null;
+            int m = count%2==0 ? count : count+1;
+            setLayout(new java.awt.GridLayout(m/2,2));
+//           
+//            }
+               for(i=0;i<count;i++){
+                    JButton b = new JButton();
+                    if(rs_dustbin.next())
+                    id = rs_dustbin.getString("ID");
+                    String currentID = id;
+                    //System.out.println(entry.getKey() + " = " + entry.getValue());
+                    b.setFont(new Font("Arial", Font.BOLD, 14));
+                    b.setPreferredSize(new Dimension(100, 100));
+                    b.addActionListener(new java.awt.event.ActionListener(){
+                    public void actionPerformed(java.awt.event.ActionEvent e){
+                        results r = new results(currentID);
+                        base.setVisible(false);
+                        r.setVisible(true);
+                    }
+                });
+                    b.setText("ID:"+currentID);
+                    b.setForeground(Color.white);
+                    if(rs_dustbin.getDouble("sensedGarbageDepth") >= landing.ultrasonicThreshold){
+                        b.setBackground(new java.awt.Color(214, 40, 40));
+                    }else{
+                        b.setBackground(new java.awt.Color(22, 219, 147));
+                    }
+                    add(b);
+                }
+              rs_dustbin.close();        
+            } 
+    }
+        
+    
     /**
      * @param args the command line arguments
      */
@@ -266,20 +250,21 @@ public class startMonitoring extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new startMonitoring().setVisible(true);
+
+                try {
+                    new startMonitoring().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(startMonitoring.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel1;
-    private javax.swing.JTextField binIDTextField;
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel errorLabel;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
 }
