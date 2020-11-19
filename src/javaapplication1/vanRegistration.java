@@ -7,7 +7,11 @@ package javaapplication1;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +28,7 @@ public class vanRegistration extends javax.swing.JFrame {
      */
     public vanRegistration() {
         initComponents();
+        
         
         this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -324,6 +329,7 @@ public class vanRegistration extends javax.swing.JFrame {
         Matcher m1 = pattern1.matcher(driverNameTextField.getText());
         Matcher m2 = pattern2.matcher(vanIdTextField.getText());
         
+        
         if(emailIdTextField.getText().equals("") || driverNameTextField.getText().equals("") || vanIdTextField.getText().equals("")){
             emptyErrorLabel.setText("All fields are mandatory!");
             b=0;
@@ -336,9 +342,15 @@ public class vanRegistration extends javax.swing.JFrame {
             if(!m2.matches()){
                 idValidation.setText("Enter a valid van ID");
                 b=0;
-            }else if(landing.van.containsKey(vanIdTextField.getText().trim())){
-                idValidation.setText("ID already exists");
-                b=0;
+            }else try {
+                String qu = "SELECT * FROM VAN WHERE id = '" + vanIdTextField.getText().trim() + "'";
+                ResultSet rs = landing.databaseHandler.execQuery(qu);
+                if(rs.next()){
+                    idValidation.setText("ID already exists");
+                    b=0;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(vanRegistration.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(status == false){
                lbl_Message.setText("Invalid email");
@@ -346,19 +358,27 @@ public class vanRegistration extends javax.swing.JFrame {
             }
         }
         if(b==1){
-            Van v = new Van();
-            v.ID = vanIdTextField.getText().trim();
-            v.driver = driverNameTextField.getText().trim();
-            v.email = emailIdTextField.getText().trim();
-        
-            landing.van.put(v.ID, v);
-            landing.vanID.add(v.ID);
-            notificationLabel.setText("Van Registered successfully.");
-            //System.out.println("van registered");
+            String vanID = vanIdTextField.getText().trim();
+            String vanDriver = driverNameTextField.getText().trim();
+            String vanEmail = emailIdTextField.getText().trim();
+            
+            // Adding to database
+            String qu = "INSERT INTO VAN VALUES ( " +
+                    "'" + vanID + "'," +
+                    "'" + vanEmail + "'," +
+                    "'" + vanDriver + "'" +
+                     ")";
+            
+            if(landing.databaseHandler.execAction(qu)){
+                notificationLabel.setText("Van Registered successfully.");
+            }else // Error
+            {
+                //Print error message
+            }
                
             //CREATE LOG
             Timestamp ts = new Timestamp(System.currentTimeMillis());
-            String log = ts + " : Van: " + v.ID + " registered.\n";
+            String log = ts + " : Van: " + vanID + " registered.\n";
             landing.logReport += log;
         }
     }//GEN-LAST:event_registerButtonActionPerformed

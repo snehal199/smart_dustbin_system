@@ -7,7 +7,11 @@ package javaapplication1;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
@@ -311,9 +315,15 @@ public class dustbinRegistration extends javax.swing.JFrame {
             if(!m1.matches()){
                 idValidation.setText("Enter a valid ID");
                 b=0;
-            }else if(landing.dustbin.containsKey(idTextField.getText().trim())){
-                idValidation.setText("ID already exists");
-                b=0;
+            }else try {
+                String qu = "SELECT * FROM DUSTBIN WHERE id = '" + idTextField.getText().trim() + "'";
+                ResultSet rs = landing.databaseHandler.execQuery(qu);
+                if(rs.next()){
+                    idValidation.setText("ID already exists");
+                    b=0;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(vanRegistration.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(!m2.matches()){
                 locationValidation.setText("Enter a valid location");
@@ -326,18 +336,34 @@ public class dustbinRegistration extends javax.swing.JFrame {
         }
         
         if(b==1){
-            Dustbin d = new Dustbin();
-            d.ID = idTextField.getText().trim();
-            d.location = locationTextField.getText().trim();
-            d.dimension = dimensionsTextField.getText().trim();
+            String d_ID = idTextField.getText().trim();
+            String d_location = locationTextField.getText().trim();
+            String d_dimension = dimensionsTextField.getText().trim();
+            String d_moisture = "DRY";
+            String qu = "INSERT INTO DUSTBIN VALUES ( " +
+                    "'" + d_ID + "'," +
+                    "'" + d_location + "'," +
+                    "'" + d_dimension+ "'," +
+                    "" + 45.0 + "," +
+                    "" + 80.0 + "," +
+                    "'" + d_moisture + "'," +
+                    "" + false + "," +
+                    "" + 0 + "," +
+                    "" + false + "," +
+                    "" + false + "" +
+                     ")";
+            
+            if(landing.databaseHandler.execAction(qu)){
+                notificationLabel.setText("Dustbin Registered successfully.");
+            }else // Error
+            {
+                //Print error message
+            }
         
-            landing.dustbin.put(d.ID, d);
-            notificationLabel.setText("Dustbin Registered successfully.");
-            //System.out.println("dustbin registered");
             
             //CREATE LOG
             Timestamp ts = new Timestamp(System.currentTimeMillis());
-            String log = ts + " : Dustbin: " + d.ID + " registered.\n";
+            String log = ts + " : Dustbin: " + d_ID + " registered.\n";
             landing.logReport += log;
         }
     }//GEN-LAST:event_registerButtonActionPerformed
