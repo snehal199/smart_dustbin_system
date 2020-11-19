@@ -10,8 +10,8 @@ import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import static javaapplication1.emailValidation.emailValidation;
+import javax.swing.JOptionPane;
 
 /**
  *

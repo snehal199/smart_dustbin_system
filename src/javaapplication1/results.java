@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package javaapplication1;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*; 
 
 /**
@@ -18,6 +20,16 @@ public class results extends javax.swing.JFrame {
     String key;
     public results(String binID) {
         initComponents();
+        
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    //System.out.println("WindowClosingDemo.windowClosing");
+                    landing.sttm.setVisible(true);
+                    //landing.sttm.setVisible(false);
+                    dispose();
+                    }
+                });
         
         key = binID;
         binIDLabel.setText(key);
@@ -232,6 +244,7 @@ public class results extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        landing.sttm.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 

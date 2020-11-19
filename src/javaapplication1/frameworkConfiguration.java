@@ -8,6 +8,7 @@ package javaapplication1;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Snehalreet
@@ -329,6 +330,9 @@ public class frameworkConfiguration extends javax.swing.JFrame {
     }
         
         if(responseDelayValid && statusDelayValid){
+            
+            //JOptionPane.showMessageDialog(this, "Are you sure?");
+            
             landing.vanResponseDelay = Integer.parseInt(vanResponseDelayTextField.getText());           //stored in minutes
             landing.dustbinStatusDelay = Integer.parseInt(dustbinStatusDelayTextField.getText());       //stored in minutes
             
