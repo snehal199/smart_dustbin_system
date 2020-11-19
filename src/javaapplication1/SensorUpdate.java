@@ -59,7 +59,7 @@ public class SensorUpdate extends TimerTask {
                     }
                     //System.out.println(entry.getKey() + " values updated.\tMoisture: " + entry.getValue().sensedMoisture + "\tGarbage Depth: " + entry.getValue().sensedGarbageDepth);
                     
-                    if(rs_dustbin.getDouble("sensedMoisture") >= landing.ultrasonicThreshold){
+                    if(rs_dustbin.getDouble("sensedGarbageDepth") >= landing.ultrasonicThreshold){
                         //System.out.println(entry.getValue().ID + " is full!");
                         int delay = rs_dustbin.getInt("delay");
                         qu_update = "UPDATE DUSTBIN SET isFull = true, delay = delay + 1 WHERE ID = '" + currentID + "'";
@@ -119,7 +119,7 @@ public class SensorUpdate extends TimerTask {
                             //Send mail to authority
                             String email_to = "iit2019171@iiita.ac.in";
                             String sub = "Delay in cleaning of Dustbin Number : " + currentID;
-                            String text = "The dustbin status delay for the dustbin number :" + currentID + " has crossed the given threshold of " + landing.dustbinStatusDelay + "mins.";
+                            String text = "The dustbin status delay for the dustbin number :" + currentID + " has crossed the given threshold of " + landing.vanResponseDelay + "mins.";
                             obj.send(email_from, password, email_to, sub, text);
                             qu_update = "UPDATE DUSTBIN SET isMailSentToAuthority = true WHERE ID = '" + currentID +"'";
                             if(landing.databaseHandler.execAction(qu_update)){

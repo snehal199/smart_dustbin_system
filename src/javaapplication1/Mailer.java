@@ -17,7 +17,7 @@ import javax.mail.Transport;
 
 
 class Mailer{  
-    public static void send(String from,String password,String to,String sub,String msg){  
+    public static void send(final String from,final String password,String to,String sub,String msg){  
           //Get properties object    
           Properties props = new Properties();    
           props.put("mail.smtp.host", "smtp.gmail.com");    
