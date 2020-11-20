@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package javaapplication1;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*; 
@@ -26,13 +28,23 @@ public class results extends javax.swing.JFrame {
         key = binID;
         binIDLabel.setText(key);
         setProgressBars(key);
+        
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    //System.out.println("WindowClosingDemo.windowClosing");
+                    landing.sttm.setVisible(true);
+                    //landing.sttm.setVisible(false);
+                    dispose();
+                    }
+                });
     }
 
     private void setProgressBars(String key){
         Timer timer = new Timer(); 
         TimerTask task = new Helper(); 
           
-        timer.schedule(task, 0, 1000000000); 
+        timer.schedule(task, 0, 5000); 
     }
     
     class Helper extends TimerTask 
@@ -240,13 +252,15 @@ public class results extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-
+        /*
         try {
           startMonitoring s = new startMonitoring();
                   s.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(results.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
+        landing.sttm.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 

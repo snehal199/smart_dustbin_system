@@ -15,8 +15,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import static java.time.Clock.system;
+import java.util.ArrayList;
+//import static java.time.Clock.system;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -39,6 +42,8 @@ public class startMonitoring extends javax.swing.JFrame {
 //    conn.setAutoCommit(false);
     PreparedStatement statement = conn.prepareStatement(qu_dustbin);
     ResultSet rs_dustbin = statement.executeQuery();
+    
+    static ArrayList<JButton> gridButtons = new ArrayList<JButton>();
     /**
      * Creates new form startMonitoring
      */
@@ -195,7 +200,7 @@ public class startMonitoring extends javax.swing.JFrame {
                     JButton b = new JButton();
                     if(rs_dustbin.next())
                     id = rs_dustbin.getString("ID");
-                    String currentID = id;
+                    final String currentID = id;
                     //System.out.println(entry.getKey() + " = " + entry.getValue());
                     b.setFont(new Font("Arial", Font.BOLD, 14));
                     b.setPreferredSize(new Dimension(100, 100));
@@ -208,15 +213,52 @@ public class startMonitoring extends javax.swing.JFrame {
                 });
                     b.setText("ID:"+currentID);
                     b.setForeground(Color.white);
+                    /*
                     if(rs_dustbin.getDouble("sensedGarbageDepth") >= landing.ultrasonicThreshold){
                         b.setBackground(new java.awt.Color(214, 40, 40));
                     }else{
                         b.setBackground(new java.awt.Color(22, 219, 147));
                     }
+                    */
                     add(b);
+                    gridButtons.add(b);
                 }
-              rs_dustbin.close();        
-            } 
+              rs_dustbin.close(); 
+              setButtonColors();
+            }
+        private void setButtonColors(){
+            Timer timer = new Timer(); 
+            TimerTask task = new Helper(); 
+            timer.schedule(task, 1, 1000); 
+        }
+        
+        class Helper extends TimerTask 
+    { 
+            @Override
+            public void run() 
+            {
+                for (int i=0; i<gridButtons.size(); i++){
+                    String binID =  gridButtons.get(i).getText().trim();
+                    binID = binID.substring(3);
+                    binID = binID.trim();
+                    
+                    String qu = "SELECT * FROM DUSTBIN WHERE ID = '" + binID + "'";
+                    ResultSet rs2 = landing.databaseHandler.execQuery(qu);
+                    double depth = 0.0;
+                    try {
+                        if(rs2.next())
+                            depth = rs2.getDouble("sensedGarbageDepth");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(startMonitoring.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    if(depth >= landing.ultrasonicThreshold)
+                        gridButtons.get(i).setBackground(new java.awt.Color(214, 40, 40));
+                    else
+                        gridButtons.get(i).setBackground(new java.awt.Color(22, 219, 147));
+                }
+            }
+        }
     }
         
     
