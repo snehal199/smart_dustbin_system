@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Nov 20 16:27:45 IST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0175-e54d-883f-00000695f020 
-on database directory C:\Users\Snehalreet\Desktop\smart_dustbin_system\database with class loader sun.misc.Launcher$AppClassLoader@610455d6 
-Loaded from file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/db-derby-10.12.1.1-lib/db-derby-10.12.1.1-lib/lib/derby.jar
+Fri Nov 20 19:05:36 IST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0175-e5de-0eaa-0000069d19c0 
+on database directory C:\Users\jyots\Documents\NetBeansProjects\smart_dustbin_system\database with class loader sun.misc.Launcher$AppClassLoader@15c8f644 
+Loaded from file:/C:/Users/jyots/Documents/NetBeansProjects/smart_dustbin_system/db-derby-10.12.1.1-lib/db-derby-10.12.1.1-lib/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_271-b09
-user.dir=C:\Users\Snehalreet\Desktop\smart_dustbin_system
-os.name=Windows 10
+java.runtime.version=1.7.0_80-b15
+user.dir=C:\Users\jyots\Documents\NetBeansProjects\smart_dustbin_system
+os.name=Windows 8.1
 os.arch=amd64
-os.version=10.0
+os.version=6.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

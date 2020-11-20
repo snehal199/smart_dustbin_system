@@ -49,6 +49,7 @@ public class SensorUpdate extends TimerTask {
             try {
                 while(rs_dustbin.next()){
                     //System.out.println(entry.getKey() + " = " + entry.getValue());
+                    int errorFlag = 0, logFlag = 0;
                     Random rand = new Random();
                     String currentID = rs_dustbin.getString("ID");
                     String qu_update = "UPDATE DUSTBIN SET sensedMoisture = "+rand.nextDouble()*100+", sensedGarbageDepth = "+rand.nextDouble()*100 +"WHERE ID = '" + currentID + "'";
@@ -65,15 +66,18 @@ public class SensorUpdate extends TimerTask {
                         qu_update = "UPDATE DUSTBIN SET isFull = true, delay = delay + 1 WHERE ID = '" + currentID + "'";
                         if(landing.databaseHandler.execAction(qu_update)){
                             // Add log
-                            ts = new Timestamp(System.currentTimeMillis());
-                            log = ts + " : Dustbin: " + currentID + " detected full.\n";
-                            landing.logReport += log;
+                            logFlag = 1;
                         }else{
                             // error
                         }
                         
                         //Mailing
                         if(!rs_dustbin.getBoolean("isMailSentToVan")){
+                            if(logFlag==1){
+                                ts = new Timestamp(System.currentTimeMillis());
+                                log = ts + " : Dustbin: " + currentID + " detected full.\n";
+                                landing.logReport += log;
+                            }
                             String van_key = Integer.toString(landing.vanIDIndex);
                             
                             //                        if(!landing.van.containsKey(van_key))
@@ -104,13 +108,20 @@ public class SensorUpdate extends TimerTask {
                             }
                             String sub = "Dustbin number : " + currentID + " is full" ;
                             String text = "Dustbin number : " + currentID + " placed at: " + rs_dustbin.getString("location") + " has reached the threshold of " + landing.ultrasonicThreshold + "cm. Clean it as soon as possible.";
-                            obj.send(email_from, password, email_to, sub, text);
-                            qu_update = "UPDATE DUSTBIN SET isMailSentToVan = true WHERE ID = '" + currentID +"'";
-                            if(landing.databaseHandler.execAction(qu_update)){
-                                //Add Log
-                                ts = new Timestamp(System.currentTimeMillis());
-                                log = ts + " : Mail sent to van: " + van_key + " To empty the dustbin: " + currentID + "\n";
-                                landing.logReport += log;
+                            try{
+                                obj.send(email_from, password, email_to, sub, text);
+                            }catch(Exception e){
+                                errorFlag = 1;
+                                System.out.println("Error in mailing to van. Catch executed.");
+                            }
+                            if(errorFlag==0){
+                                qu_update = "UPDATE DUSTBIN SET isMailSentToVan = true WHERE ID = '" + currentID +"'";
+                                if(landing.databaseHandler.execAction(qu_update)){
+                                    //Add Log
+                                    ts = new Timestamp(System.currentTimeMillis());
+                                    log = ts + " : Mail sent to van: " + van_key + " To empty the dustbin: " + currentID + "\n";
+                                    landing.logReport += log;
+                                }
                             }
                             //entry.getValue().mailSentToVanId = van_key
                         }
