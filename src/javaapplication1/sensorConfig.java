@@ -136,7 +136,7 @@ public class sensorConfig extends javax.swing.JFrame {
         cancelButton.setBackground(new java.awt.Color(26, 83, 92));
         cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(249, 251, 242));
-        cancelButton.setText("CANCEL");
+        cancelButton.setText("RESET");
         cancelButton.setBorder(null);
         cancelButton.setContentAreaFilled(false);
         cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

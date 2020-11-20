@@ -29,6 +29,17 @@ public class vanRegistration extends javax.swing.JFrame {
     public vanRegistration() {
         initComponents();
         
+        String qu_c = "SELECT COUNT(*) FROM VAN";
+        ResultSet rs_c = landing.databaseHandler.execQuery(qu_c);
+        int count = 0;
+        try {
+            rs_c.next();
+            count = rs_c.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(SensorUpdate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        vanIdTextField.setText(String.valueOf(count));
         
         this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -127,6 +138,7 @@ public class vanRegistration extends javax.swing.JFrame {
             }
         });
 
+        vanIdTextField.setEditable(false);
         vanIdTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         driverNameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -139,7 +151,7 @@ public class vanRegistration extends javax.swing.JFrame {
         cancelButton.setBackground(new java.awt.Color(26, 83, 92));
         cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(249, 251, 242));
-        cancelButton.setText("CANCEL");
+        cancelButton.setText("RESET");
         cancelButton.setBorder(null);
         cancelButton.setContentAreaFilled(false);
         cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -301,7 +313,18 @@ public class vanRegistration extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        vanIdTextField.setText("");
+        String qu_c = "SELECT COUNT(*) FROM VAN";
+        ResultSet rs_c = landing.databaseHandler.execQuery(qu_c);
+        int count = 0;
+        try {
+            rs_c.next();
+            count = rs_c.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(SensorUpdate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        vanIdTextField.setText(String.valueOf(count));
+        
         driverNameTextField.setText("");
         emailIdTextField.setText("");
         notificationLabel.setText("");
