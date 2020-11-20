@@ -83,8 +83,6 @@ public class dustbinRegistration extends javax.swing.JFrame {
             .addGap(0, 92, Short.MAX_VALUE)
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\dustbin.png")); // NOI18N
-
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -122,7 +120,7 @@ public class dustbinRegistration extends javax.swing.JFrame {
         cancelButton.setBackground(new java.awt.Color(26, 83, 92));
         cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(249, 251, 242));
-        cancelButton.setText("CANCEL");
+        cancelButton.setText("RESET");
         cancelButton.setBorder(null);
         cancelButton.setContentAreaFilled(false);
         cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
