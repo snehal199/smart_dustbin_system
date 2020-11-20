@@ -29,6 +29,17 @@ public class vanRegistration extends javax.swing.JFrame {
     public vanRegistration() {
         initComponents();
         
+        String qu_c = "SELECT COUNT(*) FROM VAN";
+        ResultSet rs_c = landing.databaseHandler.execQuery(qu_c);
+        int count = 0;
+        try {
+            rs_c.next();
+            count = rs_c.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(SensorUpdate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        vanIdTextField.setText(String.valueOf(count));
         
         this.addWindowListener(new WindowAdapter() {
                 @Override
@@ -60,7 +71,7 @@ public class vanRegistration extends javax.swing.JFrame {
         emailIdTextField = new javax.swing.JTextField();
         vanIdTextField = new javax.swing.JTextField();
         driverNameTextField = new javax.swing.JTextField();
-        cancelButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         lbl_Message = new javax.swing.JLabel();
         notificationLabel = new javax.swing.JLabel();
@@ -84,8 +95,6 @@ public class vanRegistration extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 89, Short.MAX_VALUE)
         );
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\van.png")); // NOI18N
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(java.awt.Color.white);
@@ -127,6 +136,7 @@ public class vanRegistration extends javax.swing.JFrame {
             }
         });
 
+        vanIdTextField.setEditable(false);
         vanIdTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         driverNameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -136,26 +146,26 @@ public class vanRegistration extends javax.swing.JFrame {
             }
         });
 
-        cancelButton.setBackground(new java.awt.Color(26, 83, 92));
-        cancelButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(249, 251, 242));
-        cancelButton.setText("CANCEL");
-        cancelButton.setBorder(null);
-        cancelButton.setContentAreaFilled(false);
-        cancelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cancelButton.setFocusPainted(false);
-        cancelButton.setOpaque(true);
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        resetButton.setBackground(new java.awt.Color(26, 83, 92));
+        resetButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        resetButton.setForeground(new java.awt.Color(249, 251, 242));
+        resetButton.setText("RESET");
+        resetButton.setBorder(null);
+        resetButton.setContentAreaFilled(false);
+        resetButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        resetButton.setFocusPainted(false);
+        resetButton.setOpaque(true);
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
-        cancelButton.addFocusListener(new java.awt.event.FocusAdapter() {
+        resetButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                cancelButtonFocusGained(evt);
+                resetButtonFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                cancelButtonFocusLost(evt);
+                resetButtonFocusLost(evt);
             }
         });
 
@@ -218,7 +228,7 @@ public class vanRegistration extends javax.swing.JFrame {
                         .addGap(304, 304, 304)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60)
                                 .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -274,7 +284,7 @@ public class vanRegistration extends javax.swing.JFrame {
                 .addComponent(idValidation)
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,9 +309,19 @@ public class vanRegistration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-        vanIdTextField.setText("");
+        String qu_c = "SELECT COUNT(*) FROM VAN";
+        ResultSet rs_c = landing.databaseHandler.execQuery(qu_c);
+        int count = 0;
+        try {
+            rs_c.next();
+            count = rs_c.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(SensorUpdate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        vanIdTextField.setText(String.valueOf(count));
+        
         driverNameTextField.setText("");
         emailIdTextField.setText("");
         notificationLabel.setText("");
@@ -309,7 +329,7 @@ public class vanRegistration extends javax.swing.JFrame {
         nameValidation.setText(" ");
         idValidation.setText(" ");
         emptyErrorLabel.setText(" ");
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_resetButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
@@ -388,12 +408,12 @@ public class vanRegistration extends javax.swing.JFrame {
            
     }//GEN-LAST:event_emailIdTextFieldActionPerformed
 
-    private void cancelButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusGained
-        cancelButton.setForeground(new java.awt.Color(230, 57, 70));
-    }//GEN-LAST:event_cancelButtonFocusGained
+    private void resetButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_resetButtonFocusGained
+        resetButton.setForeground(new java.awt.Color(230, 57, 70));
+    }//GEN-LAST:event_resetButtonFocusGained
 
-    private void cancelButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancelButtonFocusLost
-        cancelButton.setForeground(new java.awt.Color(249, 251, 242));    }//GEN-LAST:event_cancelButtonFocusLost
+    private void resetButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_resetButtonFocusLost
+        resetButton.setForeground(new java.awt.Color(249, 251, 242));    }//GEN-LAST:event_resetButtonFocusLost
 
     private void registerButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registerButtonFocusGained
         registerButton.setForeground(new java.awt.Color(230, 57, 70));
@@ -445,7 +465,6 @@ public class vanRegistration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
     private javax.swing.JTextField driverNameTextField;
     private javax.swing.JTextField emailIdTextField;
     private javax.swing.JLabel emptyErrorLabel;
@@ -461,6 +480,7 @@ public class vanRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel nameValidation;
     private javax.swing.JLabel notificationLabel;
     private javax.swing.JButton registerButton;
+    private javax.swing.JButton resetButton;
     private javax.swing.JTextField vanIdTextField;
     // End of variables declaration//GEN-END:variables
 }
