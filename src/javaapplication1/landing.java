@@ -137,7 +137,7 @@ public class landing extends javax.swing.JFrame {
         );
 
         frameworkConfigButton.setBackground(new java.awt.Color(255, 255, 255));
-        frameworkConfigButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\framework.png")); // NOI18N
+        frameworkConfigButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/framework.png"))); // NOI18N
         frameworkConfigButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         frameworkConfigButton.setFocusPainted(false);
         frameworkConfigButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -155,7 +155,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         registerVanButton.setBackground(new java.awt.Color(255, 255, 255));
-        registerVanButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\van.png")); // NOI18N
+        registerVanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/van.png"))); // NOI18N
         registerVanButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerVanButton.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -172,7 +172,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         sensorConfigButton.setBackground(new java.awt.Color(255, 255, 255));
-        sensorConfigButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\sensor.png")); // NOI18N
+        sensorConfigButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/sensor.png"))); // NOI18N
         sensorConfigButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sensorConfigButton.setFocusPainted(false);
         sensorConfigButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -190,7 +190,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         registerDustbinButton.setBackground(new java.awt.Color(255, 255, 255));
-        registerDustbinButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\dustbin.png")); // NOI18N
+        registerDustbinButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/dustbin.png"))); // NOI18N
         registerDustbinButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerDustbinButton.setFocusPainted(false);
         registerDustbinButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -208,7 +208,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         startMonitorButton.setBackground(new java.awt.Color(255, 255, 255));
-        startMonitorButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\start.png")); // NOI18N
+        startMonitorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/start.png"))); // NOI18N
         startMonitorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         startMonitorButton.setFocusPainted(false);
         startMonitorButton.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -226,7 +226,7 @@ public class landing extends javax.swing.JFrame {
         });
 
         stopMonitorButton.setBackground(new java.awt.Color(255, 255, 255));
-        stopMonitorButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\jyots\\Documents\\NetBeansProjects\\smart_dustbin_system\\images\\stop.png")); // NOI18N
+        stopMonitorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/stop.png"))); // NOI18N
         stopMonitorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stopMonitorButton.setFocusPainted(false);
         stopMonitorButton.addFocusListener(new java.awt.event.FocusAdapter() {

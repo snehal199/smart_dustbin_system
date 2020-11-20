@@ -52,7 +52,7 @@ public class startMonitoring extends javax.swing.JFrame {
         base = this;
         
         GridPanel pane = new GridPanel();
-        pane.setBounds(320,220,370,234);
+        pane.setBounds(320,300,370,234);
         pane.setBackground(Color.white);
         this.add(pane);
         
@@ -99,6 +99,8 @@ public class startMonitoring extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
         );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/start.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(7, 59, 76));

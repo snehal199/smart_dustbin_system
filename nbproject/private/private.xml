@@ -3,12 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jyots/Documents/NetBeansProjects/smart_dustbin_system/src/javaapplication1/landing.java</file>
-            <file>file:/C:/Users/jyots/Documents/NetBeansProjects/smart_dustbin_system/src/javaapplication1/startMonitoring.java</file>
-            <file>file:/C:/Users/jyots/Documents/NetBeansProjects/smart_dustbin_system/src/javaapplication1/DatabaseHandler.java</file>
-            <file>file:/C:/Users/jyots/Documents/NetBeansProjects/smart_dustbin_system/src/javaapplication1/results.java</file>
-            <file>file:/C:/Users/jyots/Documents/NetBeansProjects/smart_dustbin_system/src/javaapplication1/SensorUpdate.java</file>
-            <file>file:/C:/Users/jyots/Documents/NetBeansProjects/smart_dustbin_system/src/javaapplication1/Mailer.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/results.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/landing.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/sensorConfig.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/frameworkConfiguration.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/vanRegistration.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/dustbinRegistration.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/startMonitoring.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/stopMonitoring.java</file>
+            <file>file:/C:/Users/Snehalreet/Desktop/smart_dustbin_system/src/javaapplication1/sensor.png</file>
         </group>
     </open-files>
 </project-private>

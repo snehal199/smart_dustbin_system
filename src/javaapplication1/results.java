@@ -120,6 +120,8 @@ public class results extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication1/start.png"))); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(7, 59, 76));
         jLabel3.setText("Dustbin ID:");

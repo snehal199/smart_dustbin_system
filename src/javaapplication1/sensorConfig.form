@@ -180,7 +180,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\jyots\Documents\NetBeansProjects\smart_dustbin_system\images\sensor.png"/>
+              <Image iconType="3" name="/javaapplication1/sensor.png"/>
             </Property>
           </Properties>
         </Component>
